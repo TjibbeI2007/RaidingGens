@@ -10,17 +10,17 @@ import java.util.UUID;
 
 public class GeneratorModel {
     // Fields
-    Integer tier;
-    Material material;
+    private Integer tier;
+    private Material material;
 
-    String name;
-    List<String> lore;
-    Float cost;
-    Integer exp;
-    Float worth;
-    Integer requirement;
+    private String name;
+    private List<String> lore;
+    private Float cost;
+    private Integer exp;
+    private Float worth;
+    private Integer requirement;
 
-    UUID owner;
+    private UUID owner;
 
     // Constructor
     public GeneratorModel(
