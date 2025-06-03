@@ -1,30 +1,29 @@
 package Tjibbe_2007.com.raidingGens.Commands;
 
-import Tjibbe_2007.com.raidingGens.Logic.GameItem.Generator.Model.Generator;
-import org.bukkit.Material;
+import Tjibbe_2007.com.raidingGens.Logic.GameItem.Generator.Config.GeneratorConfig;
+import Tjibbe_2007.com.raidingGens.Logic.GameItem.Generator.Model.GeneratorModel;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 import org.jetbrains.annotations.NotNull;
 
-import java.util.List;
-
 public class GeneratorCommand implements CommandExecutor {
     @Override
     public boolean onCommand(@NotNull CommandSender commandSender, @NotNull Command command, @NotNull String s, @NotNull String[] strings) {
         if (commandSender instanceof Player player) {
-            player.getInventory().addItem(new Generator(
-                1,
-                Material.WHITE_STAINED_GLASS,
-                player.getUniqueId(),
-                "§aGenerator",
-                List.of("§7This is a generator", "§7that generates resources"),
-                100.0f,
-                10.0f,
-                50.0f,
-                1
-            ).create());
+            GeneratorConfig.getMaterials().forEach(material -> {
+                player.getInventory().addItem(new GeneratorModel(
+                    GeneratorConfig.getTier(material),
+                    material,
+                    GeneratorConfig.getName(material),
+                    GeneratorConfig.getLore(material),
+                    GeneratorConfig.getCost(material),
+                    GeneratorConfig.getExp(material),
+                    GeneratorConfig.getWorth(material),
+                    GeneratorConfig.getRequirement(material)
+                ).create());
+            });
 
             player.sendMessage("§8[§a?§8] §aYou received a generator");
             return true;

@@ -8,7 +8,7 @@ import org.jetbrains.annotations.NotNull;
 import java.util.List;
 import java.util.UUID;
 
-public class Generator {
+public class GeneratorModel {
     // Fields
     Integer tier;
     Material material;
@@ -16,20 +16,20 @@ public class Generator {
     String name;
     List<String> lore;
     Float cost;
-    Float exp;
+    Integer exp;
     Float worth;
     Integer requirement;
 
     UUID owner;
 
     // Constructor
-    public Generator(
+    public GeneratorModel(
             @NotNull Integer tier,
             @NotNull Material material,
             @NotNull String name,
             @NotNull List<String> lore,
             @NotNull Float cost,
-            @NotNull Float exp,
+            @NotNull Integer exp,
             @NotNull Float worth,
             @NotNull Integer requirement
     ) {
@@ -43,10 +43,26 @@ public class Generator {
         this.requirement = requirement;
     }
 
+    public GeneratorModel(
+            @NotNull Integer tier,
+            @NotNull Material material,
+            @NotNull String name,
+            @NotNull List<String> lore,
+            @NotNull Float cost,
+            @NotNull Integer exp,
+            @NotNull Float worth,
+            @NotNull Integer requirement,
+            @NotNull UUID owner
+    ) {
+        this(tier, material, name, lore, cost, exp, worth, requirement);
+        this.owner = owner;
+    }
+
     public ItemStack create() {
         ItemStack item = new ItemStack(material);
         ItemMeta itemMeta = item.getItemMeta();
 
+        assert itemMeta != null;
         itemMeta.setDisplayName(name);
         itemMeta.setLore(lore);
 
@@ -61,7 +77,7 @@ public class Generator {
     public String getName() { return name; }
     public List<String> getLore() { return lore; }
     public Float getCost() { return cost; }
-    public Float getExp() { return exp; }
+    public Integer getExp() { return exp; }
     public Float getWorth() { return worth; }
     public Integer getRequirement() { return requirement; }
 
@@ -72,7 +88,7 @@ public class Generator {
     public void setName(String name) { this.name = name; }
     public void setLore(List<String> lore) { this.lore = lore; }
     public void setCost(Float cost) { this.cost = cost; }
-    public void setExp(Float exp) { this.exp = exp; }
+    public void setExp(Integer exp) { this.exp = exp; }
     public void setWorth(Float worth) { this.worth = worth; }
     public void setRequirement(Integer requirement) { this.requirement = requirement; }
 }
