@@ -9,7 +9,7 @@ import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
 public class GeneratorConfig {
-    static List<Material> materials = List.of(
+    private static final List<Material> materials = List.of(
                 Material.WHITE_STAINED_GLASS, Material.ORANGE_STAINED_GLASS, Material.MAGENTA_STAINED_GLASS,
                 Material.LIGHT_BLUE_STAINED_GLASS, Material.YELLOW_STAINED_GLASS, Material.LIME_STAINED_GLASS,
                 Material.PINK_STAINED_GLASS, Material.GRAY_STAINED_GLASS, Material.LIGHT_GRAY_STAINED_GLASS,
@@ -22,7 +22,7 @@ public class GeneratorConfig {
                 Material.CYAN_GLAZED_TERRACOTTA, Material.PURPLE_GLAZED_TERRACOTTA
     );
 
-    static List<String> names = List.of(
+    private static final List<String> names = List.of(
             "§8[§x§E§9§E§C§E§CTier I§8] §7Generator",
             "§8[§x§F§0§7§6§1§3Tier II§8] §7Generator",
             "§8[§x§B§D§4§4§B§3Tier III§8] §7Generator",
@@ -52,31 +52,31 @@ public class GeneratorConfig {
             "§8[§x§7§9§2§A§A§CTier XXVII§8] §7Generator"
     );
 
-    static HashMap<Material, Integer> tiersMap = new HashMap<>() {{
+    private static final HashMap<Material, Integer> tiersMap = new HashMap<>() {{
         IntStream.range(0, materials.size()).forEach(i -> put(materials.get(i), i));
     }};
 
-    static HashMap<Material, String> namesMap = new HashMap<>() {{
+    private static final HashMap<Material, String> namesMap = new HashMap<>() {{
         IntStream.range(0, materials.size()).forEach(i -> put(materials.get(i), names.get(i)));
     }};
 
-    static HashMap<Material, Float> costsMap = new HashMap<>() {{
+    private static final HashMap<Material, Float> costsMap = new HashMap<>() {{
         IntStream.range(0, materials.size()).forEach(i -> put(materials.get(i), i*75.0f));
     }};
 
-    static HashMap<Material, Integer> expMap = new HashMap<>() {{
+    private static final HashMap<Material, Integer> expMap = new HashMap<>() {{
         IntStream.range(0, materials.size()).forEach(i -> put(materials.get(i), i));
     }};
 
-    static HashMap<Material, Float> worthMap = new HashMap<>() {{
+    private static final HashMap<Material, Float> worthMap = new HashMap<>() {{
         IntStream.range(0, materials.size()).forEach(i -> put(materials.get(i), i*1.1f));
     }};
 
-    static HashMap<Material, Integer> requirementsMap = new HashMap<>() {{
+    private static final HashMap<Material, Integer> requirementsMap = new HashMap<>() {{
         IntStream.range(0, materials.size()).forEach(i -> put(materials.get(i), i*2));
     }};
 
-    static HashMap<Material, List<String>> loreMap = materials.stream()
+    private static final HashMap<Material, List<String>> loreMap = materials.stream()
             .collect(Collectors.toMap(material -> material,
                 material -> List.of(
                     "§7This is a generator",
