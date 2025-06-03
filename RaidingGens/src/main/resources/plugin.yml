@@ -1,0 +1,14 @@
+name: RaidingGens
+version: '1.0'
+main: Tjibbe_2007.com.raidingGens.RaidingGens
+api-version: '1.21'
+prefix: RaidingGens
+load: STARTUP
+authors: [ Tjibbe_2007 ]
+commands:
+  getgenerator:
+    description: Gives the player a generator.
+    aliases: [gg, gens, generator, generators]
+    permission: raidinggens.generator
+    permission-message: §8[§c!§8] §cYou do not have permission to use this command.
+    usage: /generator
