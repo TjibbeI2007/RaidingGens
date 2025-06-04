@@ -11,14 +11,14 @@ import java.util.HashMap;
 public class FloorModel extends Model {
     public FloorModel(Location location) {
         super(location,
-              location.clone().add(MapConfig.getCubeSize(), 0, MapConfig.getCubeSize()),
-              MapConfig.getCubeSize(),
-              MapConfig.getCubeOutlineMaterial(),
-              MapConfig.getCubeFillMaterial());
+              location.clone().add(MapConfig.CUBE_SIZE, 0, MapConfig.CUBE_SIZE),
+              MapConfig.CUBE_SIZE,
+              MapConfig.CUBE_OUTLINE_MATERIAL,
+              MapConfig.CUBE_FILL_MATERIAL);
     }
 
     @Override
-    public HashMap<Location, Material> getFillLocations() {
+    public HashMap<Location, Material> getBlockLocations() {
         return ModelUtils.getLocations(this.corners.get("minX_minY_minZ"), this.corners.get("maxX_minY_maxZ"), ModelMode.VERTICAL);
     }
 }

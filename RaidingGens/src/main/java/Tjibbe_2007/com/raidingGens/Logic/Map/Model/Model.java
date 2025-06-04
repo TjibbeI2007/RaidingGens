@@ -24,7 +24,7 @@ public abstract class Model {
         this.corners = calculateCorners(startLocation, endLocation);
     }
 
-    public abstract HashMap<Location, Material> getFillLocations();
+    public abstract HashMap<Location, Material> getBlockLocations();
 
     public Map<String, Location> calculateCorners(Location startLocation, Location endLocation) {
         Map<String, Location> corners = new HashMap<>();

@@ -15,11 +15,11 @@ public class MapLoadManager {
     private final JavaPlugin plugin;
     private final Supplier<Integer> random = () -> new Random().nextInt(100);
     private final Location location;
-    private final int mapSize = MapConfig.getMapSize();
-    private final int mapHight = MapConfig.getMapHeight();
-    private final int cubeSize = MapConfig.getCubeSize();
-    private final int modelSpawnAmount = MapConfig.getModelSpawnAmount();
-    private final long modelSpawnDelay = MapConfig.getModelSpawnDelay();
+    private final int mapSize = MapConfig.MAP_SIZE;
+    private final int mapHight = MapConfig.MAP_HEIGHT;
+    private final int cubeSize = MapConfig.CUBE_SIZE;
+    private final int modelSpawnAmount = MapConfig.MODEL_SPAWN_AMOUNT;
+    private final long modelSpawnDelay = MapConfig.MODEL_SPAWN_DELAY;
     private final Map<Integer, Queue<Runnable>> loadQueue = new HashMap<>();
 
     public MapLoadManager(JavaPlugin plugin, Location location) {
@@ -35,17 +35,15 @@ public class MapLoadManager {
 
                 while (random.get() >= 50) {
                     Location cubeLocation = location.clone().add(x, y, z);
-                    y += cubeSize;
 
                     if (y > mapHight) {
                         addPyramidModel(cubeLocation);
-                        System.out.println("Pyramid model added at: " + cubeLocation);
                         break;
                     } else if (random.get() >= 50) {
                         addCubeModel(cubeLocation);
                     } else {
                         addSupportModel(cubeLocation);
-                    }
+                    } y += cubeSize;
                 }
             }
         }

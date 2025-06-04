@@ -12,6 +12,6 @@ public class MapPlaceManager {
     }
 
     public void placeModel() {
-        model.getFillLocations().forEach((location, material) -> location.getBlock().setType(material));
+        model.getBlockLocations().forEach((location, material) -> location.getBlock().setType(material));
     }
 }
