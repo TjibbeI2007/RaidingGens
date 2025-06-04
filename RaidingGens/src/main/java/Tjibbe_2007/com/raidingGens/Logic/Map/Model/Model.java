@@ -1,14 +1,13 @@
-package Tjibbe_2007.com.raidingGens.Logic.Map.Model.ModelFactory;
+package Tjibbe_2007.com.raidingGens.Logic.Map.Model;
 
 import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.World;
 
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
-public abstract class MapModel {
+public abstract class Model {
     protected final Location startLocation;
     protected final Location endLocation;
     protected final Map<String, Location> corners;
@@ -16,7 +15,7 @@ public abstract class MapModel {
     protected final Material outlineMaterial;
     protected final Material fillMaterial;
 
-    protected MapModel(Location startLocation, Location endLocation, int size, Material outlineMaterial, Material fillMaterial) {
+    protected Model(Location startLocation, Location endLocation, int size, Material outlineMaterial, Material fillMaterial) {
         this.startLocation = startLocation;
         this.endLocation = endLocation;
         this.size = size;
@@ -25,8 +24,7 @@ public abstract class MapModel {
         this.corners = calculateCorners(startLocation, endLocation);
     }
 
-    public abstract List<Location> getOutlineLocations();
-    public abstract List<Location> getFillLocations();
+    public abstract HashMap<Location, Material> getFillLocations();
 
     public Map<String, Location> calculateCorners(Location startLocation, Location endLocation) {
         Map<String, Location> corners = new HashMap<>();

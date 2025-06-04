@@ -1,7 +1,6 @@
 package Tjibbe_2007.com.raidingGens.Commands.Map;
 
 import Tjibbe_2007.com.raidingGens.Logic.Map.Manager.MapLoadManager;
-import Tjibbe_2007.com.raidingGens.Logic.Map.Manager.MapPlaceManager;
 import org.bukkit.Location;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
