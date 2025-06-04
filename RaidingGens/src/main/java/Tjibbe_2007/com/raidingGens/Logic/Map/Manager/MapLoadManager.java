@@ -37,8 +37,11 @@ public class MapLoadManager {
                     Location cubeLocation = location.clone().add(x, y, z);
                     y += cubeSize;
 
-                    if (y > mapHight) break;
-                    if (random.get() >= 50) {
+                    if (y > mapHight) {
+                        addPyramidModel(cubeLocation);
+                        System.out.println("Pyramid model added at: " + cubeLocation);
+                        break;
+                    } else if (random.get() >= 50) {
                         addCubeModel(cubeLocation);
                     } else {
                         addSupportModel(cubeLocation);
@@ -70,6 +73,15 @@ public class MapLoadManager {
         loadQueue.get(2).add(() -> {
             MapModel supportModel = new Model.Builder("SupportModel", location).build().createModel();
             MapPlaceManager placeManager = new MapPlaceManager(location, supportModel);
+            placeManager.placeModel();
+        });
+    }
+
+    private void addPyramidModel(Location location) {
+        loadQueue.computeIfAbsent(3, (key) -> new ArrayDeque<>());
+        loadQueue.get(3).add(() -> {
+            MapModel pyramidModel = new Model.Builder("PyramidModel", location).build().createModel();
+            MapPlaceManager placeManager = new MapPlaceManager(location, pyramidModel);
             placeManager.placeModel();
         });
     }
