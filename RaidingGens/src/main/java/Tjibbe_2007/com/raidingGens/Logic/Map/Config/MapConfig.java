@@ -3,9 +3,9 @@ package Tjibbe_2007.com.raidingGens.Logic.Map.Config;
 import org.bukkit.Material;
 
 public class MapConfig {
-    private static final int MAP_SIZE = 500;
+    private static final int MAP_SIZE = 50;
     private static final int MAP_HIGHT = 100;
-    private static final int CUBE_SIZE = 5;
+    private static final int CUBE_SIZE = 10;
 
     private static final Material CUBE_OUTLINE_MATERIAL = Material.BLACK_CONCRETE;
     private static final Material CUBE_FILL_MATERIAL = Material.GRAY_CONCRETE;

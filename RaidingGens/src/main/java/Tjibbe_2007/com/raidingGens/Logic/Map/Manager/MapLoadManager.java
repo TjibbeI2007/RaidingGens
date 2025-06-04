@@ -8,14 +8,15 @@ import org.bukkit.Location;
 import java.util.ArrayDeque;
 import java.util.Queue;
 import java.util.Random;
+import java.util.function.Supplier;
 
 public class MapLoadManager {
-    private final Random random = new Random();
+    private final Supplier<Integer> random = () -> new Random().nextInt(100);
     private final Location location;
     private final int mapSize = MapConfig.getMapSize();
     private final int mapHight = MapConfig.getMapHeight();
     private final int cubeSize = MapConfig.getCubeSize();
-    private Queue<Runnable> loadQueue = new ArrayDeque<>();
+    private final Queue<Runnable> loadQueue = new ArrayDeque<>();
 
     public MapLoadManager(Location location) {
         this.location = location;
@@ -28,20 +29,30 @@ public class MapLoadManager {
                 Location floorLocation = location.clone().add(x, y, z);
 
                 loadQueue.add(() -> {
-                    MapPlaceManager placeManager = new MapPlaceManager(floorLocation);
                     MapModel floorModel = new Model.Builder("FloorModel", floorLocation).build().createModel();
-                    placeManager.placeModel(floorModel);
+                    MapPlaceManager placeManager = new MapPlaceManager(floorLocation, floorModel);
+                    placeManager.placeModel();
                 });
 
-                while (random.nextInt(100) >= 50) {
+                while (random.get() >= 50) {
                     Location cubeLocation = location.clone().add(x, y, z);
                     y += cubeSize;
 
-                    loadQueue.add(() -> {
-                        MapPlaceManager placeManager = new MapPlaceManager(cubeLocation);
-                        MapModel cubeModel = new Model.Builder("CubeModel", cubeLocation).build().createModel();
-                        placeManager.placeModel(cubeModel);
-                    });
+                    if (y > mapHight) break;
+
+                    if (random.get() >= 50) {
+                        loadQueue.add(() -> {
+                            MapModel cubeModel = new Model.Builder("CubeModel", cubeLocation).build().createModel();
+                            MapPlaceManager placeManager = new MapPlaceManager(cubeLocation, cubeModel);
+                            placeManager.placeModel();
+                        });
+                    } else {
+                        loadQueue.add(() -> {
+                            MapModel supportModel = new Model.Builder("SupportModel", cubeLocation).build().createModel();
+                            MapPlaceManager placeManager = new MapPlaceManager(cubeLocation, supportModel);
+                            placeManager.placeModel();
+                        });
+                    }
                 }
             }
         }

@@ -2,6 +2,7 @@ package Tjibbe_2007.com.raidingGens.Logic.Map.Model.ModelFactory;
 
 import Tjibbe_2007.com.raidingGens.Logic.Map.Model.CubeModel;
 import Tjibbe_2007.com.raidingGens.Logic.Map.Model.FloorModel;
+import Tjibbe_2007.com.raidingGens.Logic.Map.Model.SupportModel;
 import org.bukkit.Location;
 
 public class Model {
@@ -26,11 +27,11 @@ public class Model {
     }
 
     public MapModel createModel() {
-        if (modelType.equals("FloorModel")) {
-            return new FloorModel(startLocation);
-        } else if (modelType.equals("CubeModel")) {
-            return new CubeModel(startLocation);
-        }
-        return null;
+        return switch (modelType) {
+            case "FloorModel" -> new FloorModel(startLocation);
+            case "CubeModel" -> new CubeModel(startLocation);
+            case "SupportModel" -> new SupportModel(startLocation);
+            default -> null;
+        };
     }
 }

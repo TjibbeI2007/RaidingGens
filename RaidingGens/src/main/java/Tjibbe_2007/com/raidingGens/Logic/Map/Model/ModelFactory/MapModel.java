@@ -5,6 +5,7 @@ import org.bukkit.Material;
 import org.bukkit.World;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 public abstract class MapModel {
@@ -23,6 +24,9 @@ public abstract class MapModel {
         this.fillMaterial = fillMaterial;
         this.corners = calculateCorners(startLocation, endLocation);
     }
+
+    public abstract List<Location> getOutlineLocations();
+    public abstract List<Location> getFillLocations();
 
     public Map<String, Location> calculateCorners(Location startLocation, Location endLocation) {
         Map<String, Location> corners = new HashMap<>();
