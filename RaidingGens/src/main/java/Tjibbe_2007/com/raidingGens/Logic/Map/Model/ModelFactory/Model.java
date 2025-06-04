@@ -2,6 +2,7 @@ package Tjibbe_2007.com.raidingGens.Logic.Map.Model.ModelFactory;
 
 import Tjibbe_2007.com.raidingGens.Logic.Map.Model.CubeModel;
 import Tjibbe_2007.com.raidingGens.Logic.Map.Model.FloorModel;
+import Tjibbe_2007.com.raidingGens.Logic.Map.Model.PyramidModel;
 import Tjibbe_2007.com.raidingGens.Logic.Map.Model.SupportModel;
 import org.bukkit.Location;
 
@@ -31,6 +32,7 @@ public class Model {
             case "FloorModel" -> new FloorModel(startLocation);
             case "CubeModel" -> new CubeModel(startLocation);
             case "SupportModel" -> new SupportModel(startLocation);
+            case "PyramidModel" -> new PyramidModel(startLocation);
             default -> null;
         };
     }

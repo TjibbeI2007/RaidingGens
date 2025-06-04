@@ -4,10 +4,10 @@ import org.bukkit.Material;
 
 public class MapConfig {
     private static final int MAP_SIZE = 150;
-    private static final int MAP_HIGHT = 100;
+    private static final int MAP_HIGHT = 40;
     private static final int CUBE_SIZE = 10;
 
-    private static final int MODEL_SPAWN_AMOUNT = 5;
+    private static final int MODEL_SPAWN_AMOUNT = 10;
     private static final long MODEL_SPAWN_DELAY = 2L;
 
     private static final Material CUBE_OUTLINE_MATERIAL = Material.BLACK_CONCRETE;

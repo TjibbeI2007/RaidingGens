@@ -3,7 +3,6 @@ package Tjibbe_2007.com.raidingGens.Logic.Map.Model;
 import org.bukkit.Location;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -69,5 +68,19 @@ public class UtilitiesModel {
         }
 
         return diagonalLocations;
+    }
+
+    public static List<Location> getPyramidLocations(Map<String, Location> corners) {
+        List<Location> pyramidLocations = new ArrayList<>();
+        int size = (int) corners.get("minX_minY_minZ").distance(corners.get("maxX_minY_minZ"));
+
+        pyramidLocations.addAll(getFillLocations(corners.get("minX_minY_minZ").clone().add(1,1,1), corners.get("maxX_minY_minZ").clone().add(-1,1,1)));
+        pyramidLocations.addAll(getFillLocations(corners.get("minX_minY_minZ").clone().add(1,1,size-1), corners.get("maxX_minY_minZ").clone().add(-1,1,size-1)));
+        pyramidLocations.addAll(getFillLocations(corners.get("minX_minY_minZ").clone().add(2,2,2), corners.get("maxX_minY_minZ").clone().add(-2,2,2)));
+        pyramidLocations.addAll(getFillLocations(corners.get("minX_minY_minZ").clone().add(2,2,size-2), corners.get("maxX_minY_minZ").clone().add(-2,2,size-2)));
+        pyramidLocations.addAll(getFillLocations(corners.get("minX_minY_minZ").clone().add(3,3,3), corners.get("maxX_minY_minZ").clone().add(-3,3,3)));
+        pyramidLocations.addAll(getFillLocations(corners.get("minX_minY_minZ").clone().add(3,3,size-3), corners.get("maxX_minY_minZ").clone().add(-3,3,size-3)));
+
+        return pyramidLocations;
     }
 }
