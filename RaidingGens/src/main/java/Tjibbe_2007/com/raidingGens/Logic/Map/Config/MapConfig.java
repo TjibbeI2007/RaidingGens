@@ -3,7 +3,7 @@ package Tjibbe_2007.com.raidingGens.Logic.Map.Config;
 import org.bukkit.Material;
 
 public class MapConfig {
-    private static final int MAP_SIZE = 50;
+    private static final int MAP_SIZE = 150;
     private static final int MAP_HIGHT = 100;
     private static final int CUBE_SIZE = 10;
 
