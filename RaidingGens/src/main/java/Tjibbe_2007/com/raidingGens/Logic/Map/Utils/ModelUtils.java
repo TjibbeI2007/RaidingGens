@@ -12,7 +12,7 @@ public class ModelUtils {
     private ModelUtils() {}
 
     public static HashMap<Location, Material> getLocations(Location start, Location end, ModelMode mode) {
-        return getLocationsCustom(start, end, MapConfig.getCubeFillMaterial(), mode.checkY, mode.checkX, mode.checkZ);
+        return getLocationsCustom(start, end, MapConfig.CUBE_FILL_MATERIAL, mode.checkY, mode.checkX, mode.checkZ);
     }
     public static HashMap<Location, Material> getLocations(Location start, Location end, Material material, ModelMode mode) {
         return getLocationsCustom(start, end, material, mode.checkY, mode.checkX, mode.checkZ);
@@ -33,7 +33,7 @@ public class ModelUtils {
             for (int y = minY; y <= maxY; y++) {
                 for (int z = minZ; z <= maxZ; z++) {
                     boolean isOutline = (checkX && (x == minX || x == maxX)) || (checkY && (y == minY || y == maxY)) || (checkZ && (z == minZ || z == maxZ));
-                    Material blockMaterial = isOutline ? MapConfig.getCubeOutlineMaterial() : material;
+                    Material blockMaterial = isOutline ? MapConfig.CUBE_OUTLINE_MATERIAL : material;
 
                     fillLocations.put(new Location(startLocation.getWorld(), x, y, z), blockMaterial);
                 }

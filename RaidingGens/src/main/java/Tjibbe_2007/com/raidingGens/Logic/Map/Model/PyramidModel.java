@@ -13,14 +13,14 @@ public class PyramidModel extends Model {
 
     public PyramidModel(Location location) {
         super(location,
-              location.clone().add(MapConfig.getCubeSize(), MapConfig.getCubeSize(), MapConfig.getCubeSize()),
-              MapConfig.getCubeSize(),
-              MapConfig.getCubeOutlineMaterial(),
-              MapConfig.getCubeFillMaterial());
+              location.clone().add(MapConfig.CUBE_SIZE, MapConfig.CUBE_SIZE, MapConfig.CUBE_SIZE),
+              MapConfig.CUBE_SIZE,
+              MapConfig.CUBE_OUTLINE_MATERIAL,
+              MapConfig.CUBE_FILL_MATERIAL);
     }
 
     @Override
-    public HashMap<Location, Material> getFillLocations() {
+    public HashMap<Location, Material> getBlockLocations() {
         HashMap<Location, Material> pyramidLocations = new HashMap<>();
         for (int i = 1; i < (size-1)/2; i++) {
             pyramidLocations.putAll(getLocations(corners.get("maxX_minY_maxZ").clone().add(-i,i,-i), corners.get("minX_minY_maxZ").clone().add(i,i,-i), Material.GLASS, ModelMode.X));
