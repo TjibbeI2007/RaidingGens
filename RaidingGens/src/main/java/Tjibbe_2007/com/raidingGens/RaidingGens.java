@@ -11,7 +11,7 @@ public final class RaidingGens extends JavaPlugin {
         getServer().getPluginManager().registerEvents(new BlockHandler(), this);
 
         this.getCommand("generator").setExecutor(new GeneratorCommand());
-        this.getCommand("createmap").setExecutor(new MapCreateCommand());
+        this.getCommand("createmap").setExecutor(new MapCreateCommand(this));
 
         this.getLogger().info("Successfully enabled");
     }
