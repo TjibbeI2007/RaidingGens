@@ -1,9 +1,9 @@
 package Tjibbe_2007.com.raidingGens.Logic.Map.Manager;
 
 import Tjibbe_2007.com.raidingGens.Logic.Map.Config.MapConfig;
-import Tjibbe_2007.com.raidingGens.Logic.Map.Model.ModelFactory.MapModel;
-import Tjibbe_2007.com.raidingGens.Logic.Map.Model.ModelFactory.Model;
-import org.bukkit.Bukkit;
+import Tjibbe_2007.com.raidingGens.Logic.Map.Logic.MapPlaceManager;
+import Tjibbe_2007.com.raidingGens.Logic.Map.Model.Model;
+import Tjibbe_2007.com.raidingGens.Logic.Map.Enum.ModelType;
 import org.bukkit.Location;
 import org.bukkit.plugin.java.JavaPlugin;
 import org.bukkit.scheduler.BukkitRunnable;
@@ -53,7 +53,7 @@ public class MapLoadManager {
     private void addFloorModel(Location location) {
         loadQueue.computeIfAbsent(0, (key) -> new ArrayDeque<>());
         loadQueue.get(0).add(() -> {
-            MapModel floorModel = new Model.Builder("FloorModel", location).build().createModel();
+            Model floorModel = new ModelManager.Builder(ModelType.FLOOR_MODEL, location).build().createModel();
             MapPlaceManager placeManager = new MapPlaceManager(location, floorModel);
             placeManager.placeModel();
         });
@@ -62,7 +62,7 @@ public class MapLoadManager {
     private void addCubeModel(Location location) {
         loadQueue.computeIfAbsent(1, (key) -> new ArrayDeque<>());
         loadQueue.get(1).add(() -> {
-            MapModel cubeModel = new Model.Builder("CubeModel", location).build().createModel();
+            Model cubeModel = new ModelManager.Builder(ModelType.CUBE_MODEL, location).build().createModel();
             MapPlaceManager placeManager = new MapPlaceManager(location, cubeModel);
             placeManager.placeModel();
         });
@@ -71,7 +71,7 @@ public class MapLoadManager {
     private void addSupportModel(Location location) {
         loadQueue.computeIfAbsent(2, (key) -> new ArrayDeque<>());
         loadQueue.get(2).add(() -> {
-            MapModel supportModel = new Model.Builder("SupportModel", location).build().createModel();
+            Model supportModel = new ModelManager.Builder(ModelType.SUPPORT_MODEL, location).build().createModel();
             MapPlaceManager placeManager = new MapPlaceManager(location, supportModel);
             placeManager.placeModel();
         });
@@ -80,7 +80,7 @@ public class MapLoadManager {
     private void addPyramidModel(Location location) {
         loadQueue.computeIfAbsent(3, (key) -> new ArrayDeque<>());
         loadQueue.get(3).add(() -> {
-            MapModel pyramidModel = new Model.Builder("PyramidModel", location).build().createModel();
+            Model pyramidModel = new ModelManager.Builder(ModelType.PYRAMID_MODEL, location).build().createModel();
             MapPlaceManager placeManager = new MapPlaceManager(location, pyramidModel);
             placeManager.placeModel();
         });

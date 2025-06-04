@@ -5,13 +5,13 @@ import org.bukkit.Material;
 public class MapConfig {
     private static final int MAP_SIZE = 150;
     private static final int MAP_HIGHT = 40;
-    private static final int CUBE_SIZE = 10;
+    private static final int CUBE_SIZE = 15;
 
     private static final int MODEL_SPAWN_AMOUNT = 10;
     private static final long MODEL_SPAWN_DELAY = 2L;
 
-    private static final Material CUBE_OUTLINE_MATERIAL = Material.BLACK_CONCRETE;
-    private static final Material CUBE_FILL_MATERIAL = Material.GRAY_CONCRETE;
+    private static final Material CUBE_OUTLINE_MATERIAL = Material.CRACKED_DEEPSLATE_TILES;
+    private static final Material CUBE_FILL_MATERIAL = Material.COBBLED_DEEPSLATE;
 
     public static int getMapSize() { return MAP_SIZE; }
     public static int getMapHeight() { return MAP_HIGHT; }
