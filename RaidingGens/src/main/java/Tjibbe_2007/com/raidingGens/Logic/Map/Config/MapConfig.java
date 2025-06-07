@@ -5,7 +5,7 @@ import org.bukkit.Material;
 public class MapConfig {
     // Map size
     public static final int MAP_SIZE = 200;
-    public static final int MAP_HEIGHT = 50;
+    public static final int MAP_HEIGHT = 70;
     public static final int CUBE_SIZE = 11;
 
     // Map spawn

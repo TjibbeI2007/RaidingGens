@@ -20,15 +20,14 @@ public class CubeModel extends Model {
 
     @Override
     public HashMap<Location, Material> getBlockLocations() {
-        Map<String, Location> corners = this.getCorners();
         HashMap<Location, Material> fillLocations = new HashMap<>();
 
-        fillLocations.putAll(ModelUtils.getLocations(corners.get("minX_minY_minZ"), corners.get("maxX_maxY_minZ"), ModelMode.X));
-        fillLocations.putAll(ModelUtils.getLocations(corners.get("minX_minY_minZ"), corners.get("minX_maxY_maxZ"), ModelMode.Z));
-        fillLocations.putAll(ModelUtils.getLocations(corners.get("maxX_minY_maxZ"), corners.get("minX_maxY_maxZ"), ModelMode.X));
-        fillLocations.putAll(ModelUtils.getLocations(corners.get("maxX_minY_maxZ"), corners.get("maxX_maxY_minZ"), ModelMode.Z));
-        fillLocations.putAll(ModelUtils.getLocations(corners.get("minX_maxY_minZ"), corners.get("maxX_maxY_maxZ"), ModelMode.VERTICAL));
-        fillLocations.putAll(ModelUtils.getLocations(corners.get("minX_minY_minZ"), corners.get("maxX_minY_maxZ"), ModelMode.VERTICAL));
+        fillLocations.putAll(ModelUtils.getLocations(this.corners.get("minX_minY_minZ"), this.corners.get("maxX_maxY_minZ"), ModelMode.X));
+        fillLocations.putAll(ModelUtils.getLocations(this.corners.get("minX_minY_minZ"), this.corners.get("minX_maxY_maxZ"), ModelMode.Z));
+        fillLocations.putAll(ModelUtils.getLocations(this.corners.get("maxX_minY_maxZ"), this.corners.get("minX_maxY_maxZ"), ModelMode.X));
+        fillLocations.putAll(ModelUtils.getLocations(this.corners.get("maxX_minY_maxZ"), this.corners.get("maxX_maxY_minZ"), ModelMode.Z));
+        fillLocations.putAll(ModelUtils.getLocations(this.corners.get("minX_maxY_minZ"), this.corners.get("maxX_maxY_maxZ"), ModelMode.VERTICAL));
+        fillLocations.putAll(ModelUtils.getLocations(this.corners.get("minX_minY_minZ"), this.corners.get("maxX_minY_maxZ"), ModelMode.VERTICAL));
 
         return fillLocations;
     }

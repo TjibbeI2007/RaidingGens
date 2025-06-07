@@ -1,10 +1,6 @@
 package Tjibbe_2007.com.raidingGens.Logic.Map.Manager;
 
-import Tjibbe_2007.com.raidingGens.Logic.Map.Model.CubeModel;
-import Tjibbe_2007.com.raidingGens.Logic.Map.Model.FloorModel;
-import Tjibbe_2007.com.raidingGens.Logic.Map.Model.Model;
-import Tjibbe_2007.com.raidingGens.Logic.Map.Model.PyramidModel;
-import Tjibbe_2007.com.raidingGens.Logic.Map.Model.SupportModel;
+import Tjibbe_2007.com.raidingGens.Logic.Map.Model.*;
 import Tjibbe_2007.com.raidingGens.Logic.Map.Enum.ModelType;
 import org.bukkit.Location;
 
@@ -35,6 +31,7 @@ public class ModelManager {
             case ModelType.CUBE_MODEL -> new CubeModel(startLocation);
             case ModelType.SUPPORT_MODEL -> new SupportModel(startLocation);
             case ModelType.PYRAMID_MODEL -> new PyramidModel(startLocation);
+            case ModelType.TRIANGLE_MODEL -> new TriangleModel(startLocation);
             default -> null;
         };
     }
