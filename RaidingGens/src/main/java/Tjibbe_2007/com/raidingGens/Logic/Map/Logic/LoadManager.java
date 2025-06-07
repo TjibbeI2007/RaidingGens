@@ -10,7 +10,7 @@ import org.bukkit.scheduler.BukkitRunnable;
 
 import java.util.*;
 
-public class TestManager {
+public class LoadManager {
     private final int cubeSize = MapConfig.CUBE_SIZE;
     private final int mapSize = MapConfig.MAP_SIZE;
     private final int mapHeight = MapConfig.MAP_HEIGHT;
@@ -24,7 +24,7 @@ public class TestManager {
     private final int maxDepth = this.mapSize / this.cubeSize;
     private final int maxHeight = this.mapHeight / this.cubeSize;
 
-    public TestManager(JavaPlugin plugin, Location location) {
+    public LoadManager(JavaPlugin plugin, Location location) {
         this.plugin = plugin;
         this.location = location;
     }
@@ -42,7 +42,13 @@ public class TestManager {
 
         for (int x = 0; x < maxWidth; x++) {
             for (int z = 0; z < maxDepth; z++) {
-                heightMap[x][z] = random.nextInt(maxHeight);
+                for (int y = 1; y < maxHeight; y++) {
+                    if (random.nextDouble() * 100 < 90.0 / (y + 1)) {
+                        break;
+                    } else {
+                        heightMap[x][z] += 1;
+                    }
+                }
             }
         }
 
@@ -54,13 +60,12 @@ public class TestManager {
 
         for (int x = 0; x < maxWidth; x++) {
             for (int z = 0; z < maxDepth; z++) {
-                for (int y = 0; y <= heightMap[x][z]; y++) {
-                    if (ModelType.PYRAMID_MODEL.canPlace(x,y,z,heightMap) && random.nextInt(100) > 50) {
-                        map[x][y][z] = ModelType.PYRAMID_MODEL;
-                    } else if (ModelType.SUPPORT_MODEL.canPlace(x,y,z, heightMap) && random.nextInt(100) > 75) {
-                        map[x][y][z] = ModelType.SUPPORT_MODEL;
-                    } else if (ModelType.CUBE_MODEL.canPlace(x,y,z, heightMap)) {
-                        map[x][y][z] = ModelType.CUBE_MODEL;
+                for (int y = 0; y < heightMap[x][z]; y++) {
+                    for (ModelType model : ModelType.getModelTypes()) {
+                        if (model.canPlace(x,y,z, heightMap) && random.nextInt(100) < model.placeChance()) {
+                            map[x][y][z] = model;
+                            break;
+                        }
                     }
                 }
             }
@@ -69,7 +74,7 @@ public class TestManager {
 
     private Map<Integer, Queue<Runnable>> generateMapQueue(ModelType[][][] map) {
         Map<Integer, Queue<Runnable>> loadQueue = new HashMap<>();
-        for (int priority = 0; priority <= ModelType.MAX_PRIORITY; priority++) loadQueue.put(priority, new ArrayDeque<>());
+        for (int priority = 0; priority <= ModelType.getHighestPriority(); priority++) loadQueue.put(priority, new ArrayDeque<>());
 
         for (int x = 0; x < maxWidth; x++) {
             for (int y = 0; y < maxHeight; y++) {
