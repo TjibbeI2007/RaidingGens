@@ -102,7 +102,9 @@ public class LoadManager {
                 for (int y = 0; y < heightMap[x][z]; y++) {
                     if (mockMap[x][y][z] == null || mockMap[x][y][z] != ModelStructure.CUBE_MODEL) continue;
 
-                    while (entranceMap[x][y][z] == null) {
+                    int iterationCount = 0;
+                    final int MAX_ITERATIONS = 100; // Define a reasonable limit
+                    while (entranceMap[x][y][z] == null && iterationCount < MAX_ITERATIONS) {
                         for (ModelEntrance entrance : sortedModels) {
                             if (entrance.canPlace(x, y, z, heightMap) &&
                                 random.nextInt(100) < entrance.placeChance()) {
