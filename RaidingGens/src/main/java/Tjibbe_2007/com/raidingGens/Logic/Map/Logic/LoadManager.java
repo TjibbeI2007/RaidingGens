@@ -17,7 +17,7 @@ public class LoadManager {
     private final int mapSize = MapConfig.MAP_SIZE;
     private final int mapHeight = MapConfig.MAP_HEIGHT;
 
-    Random random = new Random();
+    private final Random random = new Random();
 
     private final JavaPlugin plugin;
     private final Location location;
