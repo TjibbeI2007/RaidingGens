@@ -18,11 +18,6 @@ public class MapCreateCommand implements CommandExecutor {
     public boolean onCommand(@NotNull CommandSender commandSender, @NotNull Command command, @NotNull String s, @NotNull String[] strings) {
         if (commandSender instanceof Player player) {
             new LoadManager(plugin, player.getLocation()).loadMap();
-//            Location location = player.getLocation();
-//
-//            MapLoadManager mapLoadManager = new MapLoadManager(plugin, location);
-//            mapLoadManager.create();
-//            mapLoadManager.loadQueue();
             return true;
         } return false;
     }
