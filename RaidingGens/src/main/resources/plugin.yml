@@ -12,3 +12,9 @@ commands:
     permission: raidinggens.generator
     permission-message: §8[§c!§8] §cYou do not have permission to use this command.
     usage: /generator
+  createmap:
+    description: Creates a new map.
+    aliases: [cm, createmap, map]
+    permission: raidinggens.createmap
+    permission-message: §8[§c!§8] §cYou do not have permission to use this command.
+    usage: /createmap
