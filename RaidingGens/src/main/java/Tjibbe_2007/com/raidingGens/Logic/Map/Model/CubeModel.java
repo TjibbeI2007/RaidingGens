@@ -7,15 +7,16 @@ import org.bukkit.Location;
 import org.bukkit.Material;
 
 import java.util.HashMap;
-import java.util.Map;
 
 public class CubeModel extends Model {
-    public CubeModel(Location location) {
+    public CubeModel(Location location, int priority, int placeChance) {
         super(location,
               location.clone().add(MapConfig.CUBE_SIZE, MapConfig.CUBE_SIZE, MapConfig.CUBE_SIZE),
               MapConfig.CUBE_SIZE,
               MapConfig.CUBE_OUTLINE_MATERIAL,
-              MapConfig.CUBE_FILL_MATERIAL);
+              MapConfig.CUBE_FILL_MATERIAL,
+              priority,
+              placeChance);
     }
 
     @Override
@@ -26,8 +27,8 @@ public class CubeModel extends Model {
         fillLocations.putAll(ModelUtils.getLocations(this.corners.get("minX_minY_minZ"), this.corners.get("minX_maxY_maxZ"), ModelMode.Z));
         fillLocations.putAll(ModelUtils.getLocations(this.corners.get("maxX_minY_maxZ"), this.corners.get("minX_maxY_maxZ"), ModelMode.X));
         fillLocations.putAll(ModelUtils.getLocations(this.corners.get("maxX_minY_maxZ"), this.corners.get("maxX_maxY_minZ"), ModelMode.Z));
-        fillLocations.putAll(ModelUtils.getLocations(this.corners.get("minX_maxY_minZ"), this.corners.get("maxX_maxY_maxZ"), ModelMode.VERTICAL));
-        fillLocations.putAll(ModelUtils.getLocations(this.corners.get("minX_minY_minZ"), this.corners.get("maxX_minY_maxZ"), ModelMode.VERTICAL));
+        fillLocations.putAll(ModelUtils.getLocations(this.corners.get("minX_maxY_minZ"), this.corners.get("maxX_maxY_maxZ"), ModelMode.XZ));
+        fillLocations.putAll(ModelUtils.getLocations(this.corners.get("minX_minY_minZ"), this.corners.get("maxX_minY_maxZ"), ModelMode.XZ));
 
         return fillLocations;
     }

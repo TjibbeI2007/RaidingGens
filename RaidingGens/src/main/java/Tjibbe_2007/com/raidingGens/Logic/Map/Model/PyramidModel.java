@@ -11,12 +11,14 @@ import static Tjibbe_2007.com.raidingGens.Logic.Map.Utils.ModelUtils.getLocation
 
 public class PyramidModel extends Model {
 
-    public PyramidModel(Location location) {
+    public PyramidModel(Location location, int priority, int placeChance) {
         super(location,
               location.clone().add(MapConfig.CUBE_SIZE, MapConfig.CUBE_SIZE, MapConfig.CUBE_SIZE),
               MapConfig.CUBE_SIZE,
               MapConfig.CUBE_OUTLINE_MATERIAL,
-              MapConfig.CUBE_FILL_MATERIAL);
+              MapConfig.CUBE_FILL_MATERIAL,
+              priority,
+              placeChance);
     }
 
     @Override
