@@ -6,19 +6,18 @@ import org.bukkit.Location;
 import org.bukkit.Material;
 
 import java.util.HashMap;
-import java.util.Map;
 
 public class ModelUtils {
     private ModelUtils() {}
 
     public static HashMap<Location, Material> getLocations(Location start, Location end, ModelMode mode) {
-        return getLocationsCustom(start, end, MapConfig.CUBE_FILL_MATERIAL, mode.checkY, mode.checkX, mode.checkZ);
+        return getLocationsCustom(start, end, MapConfig.CUBE_FILL_MATERIAL, mode.checkX, mode.checkY, mode.checkZ);
     }
     public static HashMap<Location, Material> getLocations(Location start, Location end, Material material, ModelMode mode) {
-        return getLocationsCustom(start, end, material, mode.checkY, mode.checkX, mode.checkZ);
+        return getLocationsCustom(start, end, material, mode.checkX, mode.checkY, mode.checkZ);
     }
 
-    public static HashMap<Location, Material> getLocationsCustom(Location startLocation, Location endLocation, Material material, boolean checkY, boolean checkX, boolean checkZ) {
+    public static HashMap<Location, Material> getLocationsCustom(Location startLocation, Location endLocation, Material material, boolean checkX, boolean checkY, boolean checkZ) {
         HashMap<Location, Material> fillLocations = new HashMap<>();
 
         int minX = Math.min(startLocation.getBlockX(), endLocation.getBlockX());
@@ -43,17 +42,31 @@ public class ModelUtils {
         return fillLocations;
     }
 
-    public static HashMap<Location, Material> getPyramidLocations(Map<String, Location> corners) {
-        HashMap<Location, Material> pyramidLocations = new HashMap<>();
-        double distance = (corners.get("minX_minY_minZ").distance(corners.get("minX_minY_maxZ"))/2 - 1);
+    public static HashMap<Location, Material> getDiagonalLine(Location start, Location end) {
+        return getDiagonalLine(start, end, MapConfig.CUBE_OUTLINE_MATERIAL);
+    }
 
-        for (int i = 1; i < distance; i++) {
-            pyramidLocations.putAll(getLocations(corners.get("maxX_minY_maxZ").clone().add(-i,i,-i), corners.get("minX_minY_maxZ").clone().add(i,i,-i), Material.GLASS, ModelMode.X));
-            pyramidLocations.putAll(getLocations(corners.get("minX_minY_minZ").clone().add(i,i,i), corners.get("maxX_minY_minZ").clone().add(-i,i,i), Material.GLASS, ModelMode.X));
-            pyramidLocations.putAll(getLocations(corners.get("maxX_minY_minZ").clone().add(-i,i,i), corners.get("maxX_minY_maxZ").clone().add(-i,i,-i), Material.GLASS, ModelMode.Z));
-            pyramidLocations.putAll(getLocations(corners.get("minX_minY_minZ").clone().add(i,i,i), corners.get("minX_minY_maxZ").clone().add(i,i,-i), Material.GLASS, ModelMode.Z));
+    public static HashMap<Location, Material> getDiagonalLine(Location start, Location end, Material material) {
+        HashMap<Location, Material> line = new HashMap<>();
+
+        int dx = end.getBlockX() - start.getBlockX();
+        int dy = end.getBlockY() - start.getBlockY();
+        int dz = end.getBlockZ() - start.getBlockZ();
+
+        int steps = Math.max(Math.abs(dx), Math.max(Math.abs(dy), Math.abs(dz)));
+        int stepX = Integer.signum(dx);
+        int stepY = Integer.signum(dy);
+        int stepZ = Integer.signum(dz);
+
+        for (int i = 0; i <= steps; i++) {
+            line.put(new Location(start.getWorld(),
+                    start.getBlockX() + i * stepX,
+                    start.getBlockY() + i * stepY,
+                    start.getBlockZ() + i * stepZ),
+                    material
+            );
         }
 
-        return pyramidLocations;
+        return line;
     }
 }

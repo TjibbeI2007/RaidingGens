@@ -14,14 +14,18 @@ public abstract class Model {
     protected final int size;
     protected final Material outlineMaterial;
     protected final Material fillMaterial;
+    protected final int priority;
+    protected final int placeChance;
 
-    protected Model(Location startLocation, Location endLocation, int size, Material outlineMaterial, Material fillMaterial) {
+    protected Model(Location startLocation, Location endLocation, int size, Material outlineMaterial, Material fillMaterial, int priority, int placeChance) {
         this.startLocation = startLocation;
         this.endLocation = endLocation;
         this.size = size;
         this.outlineMaterial = outlineMaterial;
         this.fillMaterial = fillMaterial;
         this.corners = calculateCorners(startLocation, endLocation);
+        this.priority = priority;
+        this.placeChance = placeChance;
     }
 
     public abstract HashMap<Location, Material> getBlockLocations();
@@ -53,6 +57,8 @@ public abstract class Model {
     public Location getStartLocation() { return startLocation; }
     public Location getEndLocation() { return endLocation; }
     public Map<String, Location> getCorners() { return corners; }
+    public int getPriority() { return priority; }
+    public int getPlaceChance() { return placeChance; }
     public int getSize() { return size; }
     public Material getOutlineMaterial() { return outlineMaterial; }
     public Material getFillMaterial() { return fillMaterial; }

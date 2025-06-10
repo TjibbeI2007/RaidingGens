@@ -4,13 +4,13 @@ import org.bukkit.Material;
 
 public class MapConfig {
     // Map size
-    public static final int MAP_SIZE = 200;
-    public static final int MAP_HEIGHT = 70;
-    public static final int CUBE_SIZE = 11;
+    public static final int MAP_SIZE = 500;
+    public static final int MAP_HEIGHT = 100;
+    public static final int CUBE_SIZE = 12;
 
     // Map spawn
-    public static final int MODEL_SPAWN_AMOUNT = 10;
-    public static final long MODEL_SPAWN_DELAY = 2L;
+    public static final int MODEL_SPAWN_AMOUNT = 30;
+    public static final long MODEL_SPAWN_DELAY = 1L;
 
     // Map looks
     public static final Material CUBE_OUTLINE_MATERIAL = Material.CRACKED_DEEPSLATE_TILES;
