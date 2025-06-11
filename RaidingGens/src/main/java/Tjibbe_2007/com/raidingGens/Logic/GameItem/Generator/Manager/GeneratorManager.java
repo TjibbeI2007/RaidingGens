@@ -2,22 +2,18 @@ package Tjibbe_2007.com.raidingGens.Logic.GameItem.Generator.Manager;
 
 import Tjibbe_2007.com.raidingGens.Logic.GameItem.Generator.Config.GeneratorConfig;
 import Tjibbe_2007.com.raidingGens.Logic.GameItem.Generator.Model.GeneratorModel;
+import Tjibbe_2007.com.raidingGens.Logic.Player.Model.CustomPlayer;
 import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.block.Block;
-import org.bukkit.entity.Player;
-import org.bukkit.event.block.BlockBreakEvent;
-import org.bukkit.event.block.BlockPlaceEvent;
 import org.bukkit.inventory.ItemStack;
 
 import java.util.HashMap;
 
 public class GeneratorManager {
-    private static HashMap<Location, GeneratorModel> generators = new HashMap<>();
+    private static final HashMap<Location, GeneratorModel> generators = new HashMap<>();
 
-    public void placeItemBlock(BlockPlaceEvent event) {
-        Player player = event.getPlayer();
-        Block block = event.getBlockPlaced();
+    public void placeItemBlock(CustomPlayer customPlayer, Block block) {
         Material material = block.getType();
 
         if (GeneratorConfig.isValidMaterial(material)) {
@@ -30,23 +26,24 @@ public class GeneratorManager {
                         GeneratorConfig.getExp(material),
                         GeneratorConfig.getWorth(material),
                         GeneratorConfig.getRequirement(material),
-                        player.getUniqueId()
+                        customPlayer.getUuid()
                 );
 
                 generators.put(block.getLocation(), generatorModel);
         }
     }
 
-    public void removeItemBlock(BlockBreakEvent event) {
-        Player player = event.getPlayer();
-        Block block = event.getBlock();
+    public void removeItemBlock(CustomPlayer customPlayer, Block block) {
         Material material = block.getType();
 
         if (GeneratorConfig.isValidMaterial(material)) {
             GeneratorModel generator = generators.get(block.getLocation());
+            generators.remove(block.getLocation());
 
             ItemStack itemStack = generator.create();
-            player.getInventory().addItem(itemStack);
+            customPlayer.getPlayer().getInventory().addItem(itemStack);
         }
     }
+
+    public static HashMap<Location, GeneratorModel> getGenerators() { return generators; }
 }
