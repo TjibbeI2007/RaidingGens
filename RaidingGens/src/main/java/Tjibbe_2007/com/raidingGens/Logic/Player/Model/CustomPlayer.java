@@ -1,27 +1,36 @@
 package Tjibbe_2007.com.raidingGens.Logic.Player.Model;
 
+import lombok.Getter;
+import lombok.Setter;
+import lombok.experimental.Delegate;
+import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 
 import java.util.UUID;
 
 public class CustomPlayer {
-    private final Player player;
-    private final UUID uuid;
-    private final Level classLevel;
+    // THIS
+    @Getter
+    @Setter
+    private Player player;
+    @Getter
+    @Setter
+    private UUID uuid;
+    @Delegate
+    private final PlayerLevel classPlayerLevel;
+    @Delegate
+    private final PlayerGenerator playerGenerator;
+    @Delegate
+    private final PlayerCurrency playerCurrency;
 
-    CustomPlayer(Player player) {
-        this.uuid = player.getUniqueId();
-        this.player = player;
-        this.classLevel = new Level(uuid);
+    public CustomPlayer(UUID uuid) {
+        this.uuid = uuid;
+        this.classPlayerLevel = new PlayerLevel(this);
+        this.playerGenerator = new PlayerGenerator(this);
+        this.playerCurrency = new PlayerCurrency(this);
     }
 
-
-    // LEVEL
-    public int getLevel() { return classLevel.getLevel(); }
-    public float getExp() { return classLevel.getExp(); }
-    public void levelUp() { classLevel.levelUp(); }
-
-    // THIS
-    public UUID getUuid() { return uuid; }
-    public Player getPlayer() { return player; }
+    public void reloadPlayer() {
+        player = Bukkit.getPlayer(uuid);
+    }
 }
