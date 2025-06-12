@@ -13,7 +13,6 @@ public class GeneratorCommand implements CommandExecutor {
     @Override
     public boolean onCommand(@NotNull CommandSender commandSender, @NotNull Command command, @NotNull String s, @NotNull String[] strings) {
         if (commandSender instanceof Player player) {
-//            CustomPlayerRepository.saveCustomPlayerData();
             GeneratorConfig.getMaterials().forEach(material -> {
                 player.getInventory().addItem(new GeneratorModel(
                     GeneratorConfig.getTier(material),
