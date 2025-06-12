@@ -13,7 +13,7 @@ import java.io.File;
 import java.util.HashMap;
 import java.util.UUID;
 public class CustomPlayerRepository {
-    private final File dataFile = new File("plugins/RaidingGens/Config/CustomPlayer.yml");
+    private final File dataFile = new File("plugins/RaidingGens/Data/CustomPlayer.yml");
     private FileConfiguration dataConfig;
 
     @SneakyThrows
