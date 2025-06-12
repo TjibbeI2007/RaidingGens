@@ -2,6 +2,7 @@ package Tjibbe_2007.com.raidingGens.Commands;
 
 import Tjibbe_2007.com.raidingGens.Logic.GameItem.Generator.Config.GeneratorConfig;
 import Tjibbe_2007.com.raidingGens.Logic.GameItem.Generator.Model.GeneratorModel;
+import Tjibbe_2007.com.raidingGens.Logic.Player.repository.CustomPlayerRepository;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
