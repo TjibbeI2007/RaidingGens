@@ -21,7 +21,7 @@ public final class RaidingGens extends JavaPlugin {
 
         CustomPlayerRepository customPlayerRepository = new CustomPlayerRepository();
         customPlayerRepository.createRepository();
-        if (customPlayerRepository.loadRepository()) this.getLogger().severe("Failed to load player repository, some data may be lost!");
+        if (!customPlayerRepository.loadRepository()) this.getLogger().severe("Failed to load player repository, some data may be lost!");
 
         this.getLogger().info("Successfully enabled");
     }
