@@ -1,38 +1,31 @@
 package Tjibbe_2007.com.raidingGens.Logic.GameItem.Generator.Model;
 
+import lombok.Getter;
+import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
-import org.jetbrains.annotations.NotNull;
 
 import java.util.List;
 import java.util.UUID;
 
+@Getter
 public class GeneratorModel {
     // Fields
-    private Integer tier;
-    private Material material;
+    private final Integer tier;
+    private final Material material;
+    private final String name;
+    private final List<String> lore;
+    private final Float cost;
+    private final Integer exp;
+    private final Float worth;
+    private final Integer requirement;
 
-    private String name;
-    private List<String> lore;
-    private Float cost;
-    private Integer exp;
-    private Float worth;
-    private Integer requirement;
-
-    private UUID owner;
+    private final UUID owner;
+    private final Location location;
 
     // Constructor
-    public GeneratorModel(
-            @NotNull Integer tier,
-            @NotNull Material material,
-            @NotNull String name,
-            @NotNull List<String> lore,
-            @NotNull Float cost,
-            @NotNull Integer exp,
-            @NotNull Float worth,
-            @NotNull Integer requirement
-    ) {
+    public GeneratorModel(Integer tier, Material material, String name, List<String> lore, Float cost, Integer exp, Float worth, Integer requirement, UUID owner, Location location) {
         this.tier = tier;
         this.material = material;
         this.name = name;
@@ -41,23 +34,10 @@ public class GeneratorModel {
         this.exp = exp;
         this.worth = worth;
         this.requirement = requirement;
-    }
-
-    public GeneratorModel(
-            @NotNull Integer tier,
-            @NotNull Material material,
-            @NotNull String name,
-            @NotNull List<String> lore,
-            @NotNull Float cost,
-            @NotNull Integer exp,
-            @NotNull Float worth,
-            @NotNull Integer requirement,
-            @NotNull UUID owner
-    ) {
-        this(tier, material, name, lore, cost, exp, worth, requirement);
         this.owner = owner;
+        this.location = location;
     }
-
+    
     public ItemStack create() {
         ItemStack item = new ItemStack(material);
         ItemMeta itemMeta = item.getItemMeta();
@@ -69,26 +49,4 @@ public class GeneratorModel {
         item.setItemMeta(itemMeta);
         return item;
     }
-
-    // Getters
-    public Integer getTier() { return tier; }
-    public Material getMaterial() { return material; }
-    public UUID getOwner() { return owner; }
-    public String getName() { return name; }
-    public List<String> getLore() { return lore; }
-    public Float getCost() { return cost; }
-    public Integer getExp() { return exp; }
-    public Float getWorth() { return worth; }
-    public Integer getRequirement() { return requirement; }
-
-    // Setters
-    public void setTier(Integer tier) { this.tier = tier; }
-    public void setMaterial(Material material) { this.material = material; }
-    public void setOwner(UUID owner) { this.owner = owner; }
-    public void setName(String name) { this.name = name; }
-    public void setLore(List<String> lore) { this.lore = lore; }
-    public void setCost(Float cost) { this.cost = cost; }
-    public void setExp(Integer exp) { this.exp = exp; }
-    public void setWorth(Float worth) { this.worth = worth; }
-    public void setRequirement(Integer requirement) { this.requirement = requirement; }
 }

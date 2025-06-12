@@ -4,35 +4,58 @@ import Tjibbe_2007.com.raidingGens.Commands.GeneratorCommand;
 import Tjibbe_2007.com.raidingGens.Commands.Map.MapCreateCommand;
 import Tjibbe_2007.com.raidingGens.Listeners.BlockHandler;
 import Tjibbe_2007.com.raidingGens.Listeners.ConnectionHandler;
-import Tjibbe_2007.com.raidingGens.Logic.Player.repository.CustomPlayerRepository;
+import Tjibbe_2007.com.raidingGens.Logic.GameItem.Generator.Repository.GeneratorRepository;
+import Tjibbe_2007.com.raidingGens.Logic.Player.Repository.CustomPlayerRepository;
+import Tjibbe_2007.com.raidingGens.Logic.Utils.Repository.RepositoryInterface;
 import org.bukkit.plugin.java.JavaPlugin;
 
-import java.util.HashMap;
-import java.util.UUID;
+import java.util.List;
 
 public final class RaidingGens extends JavaPlugin {
+    private final List<RepositoryInterface> repositories = List.of(
+        new CustomPlayerRepository(),
+        new GeneratorRepository()
+    );
+
     @Override
     public void onEnable() {
-        getServer().getPluginManager().registerEvents(new BlockHandler(), this);
-        getServer().getPluginManager().registerEvents(new ConnectionHandler(), this);
-
-        this.getCommand("generator").setExecutor(new GeneratorCommand());
-        this.getCommand("createmap").setExecutor(new MapCreateCommand(this));
-
-        CustomPlayerRepository customPlayerRepository = new CustomPlayerRepository();
-        customPlayerRepository.createRepository();
-        if (!customPlayerRepository.loadRepository()) this.getLogger().severe("Failed to load player repository, some data may be lost!");
-
-        this.getLogger().info("Successfully enabled");
+        registerEvents();
+        registerCommands();
+        loadRepositories();
+        getLogger().info("Plugin enabled successfully.");
     }
 
     @Override
     public void onDisable() {
+        saveRepositories();
+        getLogger().info("Plugin disabled successfully.");
+    }
 
-        CustomPlayerRepository customPlayerRepository = new CustomPlayerRepository();
-        customPlayerRepository.createRepository();
-        customPlayerRepository.saveRepository();
+    private void registerEvents() {
+        getServer().getPluginManager().registerEvents(new BlockHandler(), this);
+        getServer().getPluginManager().registerEvents(new ConnectionHandler(), this);
+    }
 
-        this.getLogger().info("Successfully disabled");
+    private void registerCommands() {
+        getCommand("generator").setExecutor(new GeneratorCommand());
+        getCommand("createmap").setExecutor(new MapCreateCommand(this));
+    }
+
+    private void loadRepositories() {
+        for (RepositoryInterface repository : repositories) {
+            String name = repository.getClass().getSimpleName();
+            if (repository.load()) {
+                getLogger().info("Successfully loaded: " + name);
+            } else getLogger().warning("Failed to load: " + name);
+        } getLogger().info("All repositories loaded.");
+    }
+
+    private void saveRepositories() {
+        for (RepositoryInterface repository : repositories) {
+            String name = repository.getClass().getSimpleName();
+            if (repository.save()) {
+                getLogger().info("Successfully saved: " + name);
+            } else getLogger().warning("Failed to save: " + name);
+        } getLogger().info("All repositories saved.");
     }
 }
