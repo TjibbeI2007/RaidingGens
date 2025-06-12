@@ -1,5 +1,6 @@
 package Tjibbe_2007.com.raidingGens.Logic.GameItem.Generator.Config;
 
+import lombok.Getter;
 import org.bukkit.Material;
 
 import java.util.ArrayList;
@@ -9,6 +10,7 @@ import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
 public class GeneratorConfig {
+    @Getter
     private static final List<Material> materials = List.of(
                 Material.WHITE_STAINED_GLASS, Material.ORANGE_STAINED_GLASS, Material.MAGENTA_STAINED_GLASS,
                 Material.LIGHT_BLUE_STAINED_GLASS, Material.YELLOW_STAINED_GLASS, Material.LIME_STAINED_GLASS,
@@ -22,6 +24,7 @@ public class GeneratorConfig {
                 Material.CYAN_GLAZED_TERRACOTTA, Material.PURPLE_GLAZED_TERRACOTTA
     );
 
+    @Getter
     private static final List<String> names = List.of(
             "§8[§x§E§9§E§C§E§CTier I§8] §7Generator",
             "§8[§x§F§0§7§6§1§3Tier II§8] §7Generator",
@@ -95,7 +98,6 @@ public class GeneratorConfig {
 
     public static boolean isValidMaterial(Material material) { return materials.contains(material); }
     public static Integer getTier(Material material) { return tiersMap.getOrDefault(material, 1); }
-    public static List<Material> getMaterials() { return materials; }
     public static String getName(Material material) { return namesMap.getOrDefault(material, "§8[§fTier I§8] §fGenerator"); }
     public static Float getCost(Material material) { return costsMap.getOrDefault(material, 100.0f); }
     public static Integer getExp(Material material) { return expMap.getOrDefault(material, 10); }

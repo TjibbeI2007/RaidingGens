@@ -5,7 +5,6 @@ import Tjibbe_2007.com.raidingGens.Logic.GameItem.Generator.Model.GeneratorModel
 import Tjibbe_2007.com.raidingGens.Logic.Utils.ValueValidator;
 import lombok.Getter;
 import org.bukkit.Location;
-import org.jetbrains.annotations.NotNull;
 
 import java.util.HashMap;
 
@@ -21,8 +20,8 @@ public class PlayerGenerator {
         this.customPlayer = customPlayer;
     }
 
-    public void addPlacedGenerators(Location location) { new GeneratorManager().placeItemBlock(customPlayer, location.getBlock()); }
-    public void removePlacedGenerators(Location location) { new GeneratorManager().removeItemBlock(customPlayer, location.getBlock()); }
+    public void addPlacedGenerators(Location location) { new GeneratorManager().place(customPlayer, location.getBlock()); }
+    public void removePlacedGenerators(Location location) { new GeneratorManager().remove(customPlayer, location.getBlock()); }
 
     public void addMaxGenerators(int maxGenerators) {
         ValueValidator.validSumPositive(this.maxGenerators + maxGenerators);

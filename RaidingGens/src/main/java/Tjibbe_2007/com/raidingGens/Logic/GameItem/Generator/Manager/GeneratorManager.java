@@ -18,7 +18,7 @@ public class GeneratorManager {
     @Setter
     private static HashMap<Location, GeneratorModel> generators = new HashMap<>();
 
-    public void placeItemBlock(CustomPlayer customPlayer, Block block) {
+    public void place(CustomPlayer customPlayer, Block block) {
         Material material = block.getType();
         Location location = block.getLocation();
 
@@ -28,7 +28,7 @@ public class GeneratorManager {
         }
     }
 
-    public void removeItemBlock(CustomPlayer customPlayer, Block block) {
+    public void remove(CustomPlayer customPlayer, Block block) {
         Material material = block.getType();
 
         if (GeneratorConfig.isValidMaterial(material)) {
