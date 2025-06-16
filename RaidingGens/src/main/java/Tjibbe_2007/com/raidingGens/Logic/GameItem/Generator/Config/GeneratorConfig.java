@@ -56,7 +56,7 @@ public class GeneratorConfig {
     );
 
     private static final HashMap<Material, Integer> tiersMap = new HashMap<>() {{
-        IntStream.range(0, materials.size()).forEach(i -> put(materials.get(i), i));
+        IntStream.range(0, materials.size()).forEach(i -> put(materials.get(i), (i+1)));
     }};
 
     private static final HashMap<Material, String> namesMap = new HashMap<>() {{
@@ -64,19 +64,19 @@ public class GeneratorConfig {
     }};
 
     private static final HashMap<Material, Float> costsMap = new HashMap<>() {{
-        IntStream.range(0, materials.size()).forEach(i -> put(materials.get(i), i*75.0f));
+        IntStream.range(0, materials.size()).forEach(i -> put(materials.get(i), (i+1)*75.0f));
     }};
 
     private static final HashMap<Material, Integer> expMap = new HashMap<>() {{
-        IntStream.range(0, materials.size()).forEach(i -> put(materials.get(i), i));
+        IntStream.range(0, materials.size()).forEach(i -> put(materials.get(i), (i+1)));
     }};
 
     private static final HashMap<Material, Float> worthMap = new HashMap<>() {{
-        IntStream.range(0, materials.size()).forEach(i -> put(materials.get(i), i*1.1f));
+        IntStream.range(0, materials.size()).forEach(i -> put(materials.get(i), (i+1)*1.1f));
     }};
 
     private static final HashMap<Material, Integer> requirementsMap = new HashMap<>() {{
-        IntStream.range(0, materials.size()).forEach(i -> put(materials.get(i), i*2));
+        IntStream.range(0, materials.size()).forEach(i -> put(materials.get(i), (i)*2));
     }};
 
     private static final HashMap<Material, List<String>> loreMap = materials.stream()
@@ -104,4 +104,5 @@ public class GeneratorConfig {
     public static Float getWorth(Material material) { return worthMap.getOrDefault(material, 1.0f); }
     public static Integer getRequirement(Material material) { return requirementsMap.getOrDefault(material, 1); }
     public static List<String> getLore(Material material) { return loreMap.getOrDefault(material, new ArrayList<>()); }
+    public static Material getMaterial(Integer tier) { return materials.get(tier+-1); }
 }

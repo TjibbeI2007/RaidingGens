@@ -2,8 +2,8 @@ package Tjibbe_2007.com.raidingGens.Logic.GameItem.Generator.Repository;
 
 import Tjibbe_2007.com.raidingGens.Logic.GameItem.Generator.Config.GeneratorConfig;
 import Tjibbe_2007.com.raidingGens.Logic.GameItem.Generator.Manager.GeneratorManager;
-import Tjibbe_2007.com.raidingGens.Logic.GameItem.Generator.Model.GeneratorModel;
 import Tjibbe_2007.com.raidingGens.Logic.GameItem.Generator.Model.GeneratorBuilder;
+import Tjibbe_2007.com.raidingGens.Logic.GameItem.Generator.Model.GeneratorModel;
 import Tjibbe_2007.com.raidingGens.Logic.Utils.Repository.RepositoryInterface;
 import lombok.SneakyThrows;
 import org.bukkit.Location;
@@ -12,9 +12,10 @@ import org.bukkit.configuration.ConfigurationSection;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.configuration.file.YamlConfiguration;
 
-import java.io.IOException;
-import java.util.*;
 import java.io.File;
+import java.io.IOException;
+import java.util.HashMap;
+import java.util.UUID;
 
 public class GeneratorRepository implements RepositoryInterface {
     private final File dataFile = new File("plugins/RaidingGens/Data/GameBlocks/PlacedGenerators.yml");

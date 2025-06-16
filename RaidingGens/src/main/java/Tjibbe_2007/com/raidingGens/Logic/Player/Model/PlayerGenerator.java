@@ -20,15 +20,15 @@ public class PlayerGenerator {
         this.customPlayer = customPlayer;
     }
 
-    public void addPlacedGenerators(Location location) { new GeneratorManager().place(customPlayer, location.getBlock()); }
-    public void removePlacedGenerators(Location location) { new GeneratorManager().remove(customPlayer, location.getBlock()); }
+    public void addPlacedGenerators(Location location, GeneratorModel generatorModel) { placedGenerators.put(location, generatorModel); }
+    public void removePlacedGenerators(Location location) { placedGenerators.remove(location); }
+    public void resetPlacedGenerators() { placedGenerators.clear(); }
 
     public void addMaxGenerators(int maxGenerators) {
         ValueValidator.validSumPositive(this.maxGenerators + maxGenerators);
         this.maxGenerators += maxGenerators;
     }
 
-    public void resetPlacedGenerators() { placedGenerators.clear(); }
     public void setMaxGenerators(int maxGenerators) {
         ValueValidator.validSumPositive(maxGenerators);
         this.maxGenerators = maxGenerators;

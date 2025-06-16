@@ -4,6 +4,8 @@ import Tjibbe_2007.com.raidingGens.Commands.GeneratorCommand;
 import Tjibbe_2007.com.raidingGens.Commands.Map.MapCreateCommand;
 import Tjibbe_2007.com.raidingGens.Listeners.BlockHandler;
 import Tjibbe_2007.com.raidingGens.Listeners.ConnectionHandler;
+import Tjibbe_2007.com.raidingGens.Listeners.InteractionHandler;
+import Tjibbe_2007.com.raidingGens.Logic.GameItem.Generator.Drops.Logic.GeneratorDrop;
 import Tjibbe_2007.com.raidingGens.Logic.GameItem.Generator.Repository.GeneratorRepository;
 import Tjibbe_2007.com.raidingGens.Logic.Player.Repository.CustomPlayerRepository;
 import Tjibbe_2007.com.raidingGens.Logic.Utils.Repository.RepositoryInterface;
@@ -22,6 +24,7 @@ public final class RaidingGens extends JavaPlugin {
         registerEvents();
         registerCommands();
         loadRepositories();
+        registerClasses();
         getLogger().info("Plugin enabled successfully.");
     }
 
@@ -31,9 +34,14 @@ public final class RaidingGens extends JavaPlugin {
         getLogger().info("Plugin disabled successfully.");
     }
 
+    private void registerClasses() {
+        new GeneratorDrop(this).drop();
+    }
+
     private void registerEvents() {
         getServer().getPluginManager().registerEvents(new BlockHandler(), this);
         getServer().getPluginManager().registerEvents(new ConnectionHandler(), this);
+        getServer().getPluginManager().registerEvents(new InteractionHandler(), this);
     }
 
     private void registerCommands() {

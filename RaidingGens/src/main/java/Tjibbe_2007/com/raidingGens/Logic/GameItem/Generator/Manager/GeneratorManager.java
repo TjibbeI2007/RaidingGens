@@ -18,20 +18,24 @@ public class GeneratorManager {
     @Setter
     private static HashMap<Location, GeneratorModel> generators = new HashMap<>();
 
-    public void place(CustomPlayer customPlayer, Block block) {
+    public static void place(CustomPlayer customPlayer, Block block) {
         Material material = block.getType();
         Location location = block.getLocation();
 
         if (GeneratorConfig.isValidMaterial(material)) {
             GeneratorModel generatorModel = new GeneratorBuilder(material).setLocation(location).setOwner(customPlayer.getUuid()).build();
+
+            customPlayer.addPlacedGenerators(location, generatorModel);
             generators.put(block.getLocation(), generatorModel);
         }
     }
 
-    public void remove(CustomPlayer customPlayer, Block block) {
+    public static void remove(CustomPlayer customPlayer, Block block) {
         Material material = block.getType();
+        Location location = block.getLocation();
 
         if (GeneratorConfig.isValidMaterial(material)) {
+            customPlayer.removePlacedGenerators(location);
             GeneratorModel generator = generators.get(block.getLocation());
             generators.remove(block.getLocation());
 

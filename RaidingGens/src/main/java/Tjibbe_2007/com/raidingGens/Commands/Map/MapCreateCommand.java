@@ -10,9 +10,7 @@ import org.jetbrains.annotations.NotNull;
 
 public class MapCreateCommand implements CommandExecutor {
     JavaPlugin plugin;
-    public MapCreateCommand(JavaPlugin plugin) {
-        this.plugin = plugin;
-    }
+    public MapCreateCommand(JavaPlugin plugin) { this.plugin = plugin; }
 
     @Override
     public boolean onCommand(@NotNull CommandSender commandSender, @NotNull Command command, @NotNull String s, @NotNull String[] strings) {
