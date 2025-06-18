@@ -1,7 +1,6 @@
 package Tjibbe_2007.com.raidingGens.Listeners;
 
 import Tjibbe_2007.com.raidingGens.Logic.Player.Manager.CustomPlayerManager;
-import org.bukkit.SoundCategory;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;

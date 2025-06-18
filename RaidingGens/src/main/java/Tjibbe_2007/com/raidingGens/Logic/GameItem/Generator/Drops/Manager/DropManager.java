@@ -7,6 +7,7 @@ import Tjibbe_2007.com.raidingGens.Logic.Player.Model.CustomPlayer;
 import Tjibbe_2007.com.raidingGens.Logic.Utils.Style;
 import net.md_5.bungee.api.ChatMessageType;
 import net.md_5.bungee.api.chat.TextComponent;
+import org.bukkit.Bukkit;
 import org.bukkit.Material;
 import org.bukkit.Sound;
 import org.bukkit.entity.Player;
@@ -44,8 +45,9 @@ public class DropManager {
 
         customPlayer.addExp(exp);
         customPlayer.addTokens(balance);
+        customPlayer.levelUp();
 
         player.spigot().sendMessage(ChatMessageType.ACTION_BAR, new TextComponent(String.format("§7+%s%.1f%s §8| §7+%s%.1f%s", Style.VALUE_COLOUR, balance, Style.BALANCE_STYLE, Style.VALUE_COLOUR, exp, Style.EXP_STYLE)));
-        player.playSound(player.getLocation(), Sound.BLOCK_STONE_PLACE, 1.0f, 0.1f);
+        player.playSound(player.getLocation(), Sound.BLOCK_STONE_PLACE, 10.0f, 0.1f);
     }
 }

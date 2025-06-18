@@ -9,6 +9,7 @@ import Tjibbe_2007.com.raidingGens.Logic.GameItem.Generator.Drops.Logic.Generato
 import Tjibbe_2007.com.raidingGens.Logic.GameItem.Generator.Repository.GeneratorRepository;
 import Tjibbe_2007.com.raidingGens.Logic.Player.Repository.CustomPlayerRepository;
 import Tjibbe_2007.com.raidingGens.Logic.Utils.Repository.RepositoryInterface;
+import org.bukkit.Bukkit;
 import org.bukkit.plugin.java.JavaPlugin;
 
 import java.util.List;
@@ -23,7 +24,7 @@ public final class RaidingGens extends JavaPlugin {
     public void onEnable() {
         registerEvents();
         registerCommands();
-        loadRepositories();
+        Bukkit.getScheduler().runTaskLater(this, this::loadRepositories, 10L);
         registerClasses();
         getLogger().info("Plugin enabled successfully.");
     }
@@ -39,7 +40,7 @@ public final class RaidingGens extends JavaPlugin {
     }
 
     private void registerEvents() {
-        getServer().getPluginManager().registerEvents(new BlockHandler(), this);
+        getServer().getPluginManager().registerEvents(new BlockHandler(this), this);
         getServer().getPluginManager().registerEvents(new ConnectionHandler(), this);
         getServer().getPluginManager().registerEvents(new InteractionHandler(), this);
     }
