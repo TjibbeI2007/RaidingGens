@@ -104,5 +104,10 @@ public class GeneratorConfig {
     public static Float getWorth(Material material) { return worthMap.getOrDefault(material, 1.0f); }
     public static Integer getRequirement(Material material) { return requirementsMap.getOrDefault(material, 1); }
     public static List<String> getLore(Material material) { return loreMap.getOrDefault(material, new ArrayList<>()); }
-    public static Material getMaterial(Integer tier) { return materials.get(tier+-1); }
+    public static Material getMaterial(Integer tier) {
+        if (tier < 1 || tier > materials.size()) {
+            throw new IllegalArgumentException("Tier must be between 1 and " + materials.size() + ". Provided: " + tier);
+        }
+        return materials.get(tier - 1);
+    }
 }
