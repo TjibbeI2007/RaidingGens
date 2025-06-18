@@ -1,5 +1,6 @@
 package Tjibbe_2007.com.raidingGens.Logic.GameItem.Generator.Config;
 
+import lombok.Getter;
 import org.bukkit.Material;
 
 import java.util.ArrayList;
@@ -9,7 +10,8 @@ import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
 public class GeneratorConfig {
-    static List<Material> materials = List.of(
+    @Getter
+    private static final List<Material> materials = List.of(
                 Material.WHITE_STAINED_GLASS, Material.ORANGE_STAINED_GLASS, Material.MAGENTA_STAINED_GLASS,
                 Material.LIGHT_BLUE_STAINED_GLASS, Material.YELLOW_STAINED_GLASS, Material.LIME_STAINED_GLASS,
                 Material.PINK_STAINED_GLASS, Material.GRAY_STAINED_GLASS, Material.LIGHT_GRAY_STAINED_GLASS,
@@ -22,7 +24,8 @@ public class GeneratorConfig {
                 Material.CYAN_GLAZED_TERRACOTTA, Material.PURPLE_GLAZED_TERRACOTTA
     );
 
-    static List<String> names = List.of(
+    @Getter
+    private static final List<String> names = List.of(
             "§8[§x§E§9§E§C§E§CTier I§8] §7Generator",
             "§8[§x§F§0§7§6§1§3Tier II§8] §7Generator",
             "§8[§x§B§D§4§4§B§3Tier III§8] §7Generator",
@@ -52,31 +55,31 @@ public class GeneratorConfig {
             "§8[§x§7§9§2§A§A§CTier XXVII§8] §7Generator"
     );
 
-    static HashMap<Material, Integer> tiersMap = new HashMap<>() {{
-        IntStream.range(0, materials.size()).forEach(i -> put(materials.get(i), i));
+    private static final HashMap<Material, Integer> tiersMap = new HashMap<>() {{
+        IntStream.range(0, materials.size()).forEach(i -> put(materials.get(i), (i+1)));
     }};
 
-    static HashMap<Material, String> namesMap = new HashMap<>() {{
+    private static final HashMap<Material, String> namesMap = new HashMap<>() {{
         IntStream.range(0, materials.size()).forEach(i -> put(materials.get(i), names.get(i)));
     }};
 
-    static HashMap<Material, Float> costsMap = new HashMap<>() {{
-        IntStream.range(0, materials.size()).forEach(i -> put(materials.get(i), i*75.0f));
+    private static final HashMap<Material, Float> costsMap = new HashMap<>() {{
+        IntStream.range(0, materials.size()).forEach(i -> put(materials.get(i), (i+1)*75.0f));
     }};
 
-    static HashMap<Material, Integer> expMap = new HashMap<>() {{
-        IntStream.range(0, materials.size()).forEach(i -> put(materials.get(i), i));
+    private static final HashMap<Material, Integer> expMap = new HashMap<>() {{
+        IntStream.range(0, materials.size()).forEach(i -> put(materials.get(i), (i+1)));
     }};
 
-    static HashMap<Material, Float> worthMap = new HashMap<>() {{
-        IntStream.range(0, materials.size()).forEach(i -> put(materials.get(i), i*1.1f));
+    private static final HashMap<Material, Float> worthMap = new HashMap<>() {{
+        IntStream.range(0, materials.size()).forEach(i -> put(materials.get(i), (i+1)*1.1f));
     }};
 
-    static HashMap<Material, Integer> requirementsMap = new HashMap<>() {{
-        IntStream.range(0, materials.size()).forEach(i -> put(materials.get(i), i*2));
+    private static final HashMap<Material, Integer> requirementsMap = new HashMap<>() {{
+        IntStream.range(0, materials.size()).forEach(i -> put(materials.get(i), (i)*2));
     }};
 
-    static HashMap<Material, List<String>> loreMap = materials.stream()
+    private static final HashMap<Material, List<String>> loreMap = materials.stream()
             .collect(Collectors.toMap(material -> material,
                 material -> List.of(
                     "§7This is a generator",
@@ -95,11 +98,16 @@ public class GeneratorConfig {
 
     public static boolean isValidMaterial(Material material) { return materials.contains(material); }
     public static Integer getTier(Material material) { return tiersMap.getOrDefault(material, 1); }
-    public static List<Material> getMaterials() { return materials; }
     public static String getName(Material material) { return namesMap.getOrDefault(material, "§8[§fTier I§8] §fGenerator"); }
     public static Float getCost(Material material) { return costsMap.getOrDefault(material, 100.0f); }
     public static Integer getExp(Material material) { return expMap.getOrDefault(material, 10); }
     public static Float getWorth(Material material) { return worthMap.getOrDefault(material, 1.0f); }
     public static Integer getRequirement(Material material) { return requirementsMap.getOrDefault(material, 1); }
     public static List<String> getLore(Material material) { return loreMap.getOrDefault(material, new ArrayList<>()); }
+    public static Material getMaterial(Integer tier) {
+        if (tier < 1 || tier > materials.size()) {
+            throw new IllegalArgumentException("Tier must be between 1 and " + materials.size() + ". Provided: " + tier);
+        }
+        return materials.get(tier - 1);
+    }
 }

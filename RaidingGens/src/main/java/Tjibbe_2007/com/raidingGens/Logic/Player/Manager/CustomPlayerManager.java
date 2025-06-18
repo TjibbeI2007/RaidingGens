@@ -2,6 +2,8 @@ package Tjibbe_2007.com.raidingGens.Logic.Player.Manager;
 
 import Tjibbe_2007.com.raidingGens.Logic.Player.Model.CustomPlayer;
 import lombok.Getter;
+import org.bukkit.Bukkit;
+import org.bukkit.Sound;
 import org.bukkit.entity.Player;
 
 import java.util.HashMap;
@@ -12,6 +14,8 @@ public class CustomPlayerManager {
     private static final HashMap<UUID, CustomPlayer> customPlayers = new HashMap<>();
 
     public void register(Player player) {
+        player.stopAllSounds();
+
         customPlayers.putIfAbsent(player.getUniqueId(), new CustomPlayer(player.getUniqueId()));
         customPlayers.get(player.getUniqueId()).setPlayer(player);
     }
