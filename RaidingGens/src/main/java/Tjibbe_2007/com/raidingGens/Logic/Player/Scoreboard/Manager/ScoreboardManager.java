@@ -1,5 +1,6 @@
 package Tjibbe_2007.com.raidingGens.Logic.Player.Scoreboard.Manager;
 
+import Tjibbe_2007.com.raidingGens.Logic.Player.Config.CustomPlayerConfig;
 import Tjibbe_2007.com.raidingGens.Logic.Player.Model.CustomPlayer;
 import Tjibbe_2007.com.raidingGens.Logic.Utils.Style;
 import org.bukkit.Bukkit;
@@ -58,7 +59,7 @@ public class ScoreboardManager {
                 Style.PRIMARY_COLOUR,
                 Style.PRIMARY_COLOUR,
                 Style.VALUE_COLOUR,
-                (customPlayer.getExp() / customPlayer.getRequiredExp()) * 100
+                (customPlayer.getExp() / CustomPlayerConfig.getExpFormula().apply(customPlayer.getLevel())) * 100
         ));
         levelUpPercentage.setScore(8);
 
