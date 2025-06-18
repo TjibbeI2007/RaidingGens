@@ -1,8 +1,8 @@
 package Tjibbe_2007.com.raidingGens.Listeners;
 
+import Tjibbe_2007.com.raidingGens.Logic.GameItem.GameItem.Manager.GameItemManager;
+import Tjibbe_2007.com.raidingGens.Logic.GameItem.GameItem.Manager.GameItemManagerInterface;
 import Tjibbe_2007.com.raidingGens.Logic.GameItem.Generator.Config.GeneratorConfig;
-import Tjibbe_2007.com.raidingGens.Logic.GameItem.Generator.Manager.GeneratorManager;
-import Tjibbe_2007.com.raidingGens.Logic.Player.Manager.CustomPlayerManager;
 import org.bukkit.Location;
 import org.bukkit.Sound;
 import org.bukkit.SoundCategory;
@@ -26,7 +26,7 @@ public class BlockHandler implements Listener {
         Block block = event.getBlockPlaced();
         Location location = block.getLocation();
 
-        GeneratorManager.place(event);
+        new GameItemManager().place(event);
     }
     
     @EventHandler
@@ -35,11 +35,11 @@ public class BlockHandler implements Listener {
         Block block = event.getBlock();
         Location location = block.getLocation();
 
-        if (GeneratorConfig.isValidMaterial(block.getType())) {
+        if (GeneratorConfig.getInstance().isValidMaterial(block.getType())) {
             player.stopSound(SoundCategory.BLOCKS);
             player.playSound(location, Sound.BLOCK_VAULT_BREAK,1.0f,0.1f);
         }
 
-        GeneratorManager.remove(CustomPlayerManager.getCustomPlayers().get(player.getUniqueId()), block);
+        new GameItemManager().remove(event);
     }
 }

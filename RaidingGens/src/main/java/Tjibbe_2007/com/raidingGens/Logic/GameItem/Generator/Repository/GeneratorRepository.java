@@ -1,8 +1,8 @@
 package Tjibbe_2007.com.raidingGens.Logic.GameItem.Generator.Repository;
 
+import Tjibbe_2007.com.raidingGens.Logic.GameItem.GameItem.Model.GameItemBuilder;
 import Tjibbe_2007.com.raidingGens.Logic.GameItem.Generator.Config.GeneratorConfig;
 import Tjibbe_2007.com.raidingGens.Logic.GameItem.Generator.Manager.GeneratorManager;
-import Tjibbe_2007.com.raidingGens.Logic.GameItem.Generator.Model.GeneratorBuilder;
 import Tjibbe_2007.com.raidingGens.Logic.GameItem.Generator.Model.GeneratorModel;
 import Tjibbe_2007.com.raidingGens.Logic.Utils.Repository.RepositoryInterface;
 import lombok.SneakyThrows;
@@ -39,7 +39,7 @@ public class GeneratorRepository implements RepositoryInterface {
         generators.forEach(((location, generatorModel) -> {
             HashMap<String, Object> generatorInfo = new HashMap<>();
 
-            generatorInfo.put("owner", generatorModel.getOwner().toString());
+            generatorInfo.put("owner", generatorModel.owner().toString());
             generatorInfo.put("location", location.serialize());
 
             generatorData.put(generatorData.size(), generatorInfo);
@@ -74,9 +74,9 @@ public class GeneratorRepository implements RepositoryInterface {
 
             Location location = Location.deserialize(locationSection.getValues(false));
             Material material = location.getBlock().getType();
-            if (!GeneratorConfig.isValidMaterial(material)) continue;
+            if (!GeneratorConfig.getInstance().isValidMaterial(material)) continue;
 
-            generators.put(location, new GeneratorBuilder(material)
+            generators.put(location, (GeneratorModel) new GameItemBuilder(material)
                             .setOwner(owner)
                             .build());
         }

@@ -1,13 +1,13 @@
 package Tjibbe_2007.com.raidingGens.Logic.Player.Repository;
 
+import Tjibbe_2007.com.raidingGens.Logic.GameItem.GameItem.Model.GameItemBuilderInterface;
+import Tjibbe_2007.com.raidingGens.Logic.GameItem.GameItem.Model.GameItemBuilder;
 import Tjibbe_2007.com.raidingGens.Logic.GameItem.Generator.Config.GeneratorConfig;
-import Tjibbe_2007.com.raidingGens.Logic.GameItem.Generator.Model.GeneratorBuilder;
 import Tjibbe_2007.com.raidingGens.Logic.GameItem.Generator.Model.GeneratorModel;
 import Tjibbe_2007.com.raidingGens.Logic.Player.Manager.CustomPlayerManager;
 import Tjibbe_2007.com.raidingGens.Logic.Player.Model.CustomPlayer;
 import Tjibbe_2007.com.raidingGens.Logic.Utils.Repository.RepositoryInterface;
 import lombok.SneakyThrows;
-import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.configuration.ConfigurationSection;
@@ -18,7 +18,6 @@ import java.io.File;
 import java.io.IOException;
 import java.util.HashMap;
 import java.util.UUID;
-import java.util.stream.Collectors;
 
 public class CustomPlayerRepository implements RepositoryInterface {
     private final File dataFile = new File("plugins/RaidingGens/Data/CustomPlayer.yml");
@@ -97,14 +96,14 @@ public class CustomPlayerRepository implements RepositoryInterface {
 
                     Location location = Location.deserialize(locationSection.getValues(false));
                     Material material = location.getBlock().getType();
-                    if (!GeneratorConfig.isValidMaterial(material)) continue;
+                    if (!GeneratorConfig.getInstance().isValidMaterial(material)) continue;
 
-                    GeneratorModel generatorModel = new GeneratorBuilder(material)
+                    GameItemBuilderInterface generatorModel = new GameItemBuilder(material)
                             .setOwner(uuid)
                             .setLocation(location)
                             .build();
 
-                    placedGenerators.put(location, generatorModel);
+                    placedGenerators.put(location, (GeneratorModel) generatorModel);
                 }
             }
 

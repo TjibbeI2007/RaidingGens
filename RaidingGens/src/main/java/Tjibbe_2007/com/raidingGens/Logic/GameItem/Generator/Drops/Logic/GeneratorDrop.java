@@ -20,7 +20,7 @@ public class GeneratorDrop {
                     UUID uuid = player.getUniqueId();
 
                     CustomPlayerManager.getCustomPlayers().get(uuid).getPlacedGenerators().forEach((location, generatorModel) -> {
-                        new DropBuilder(generatorModel.getTier()).setWorth(generatorModel.getWorth()).setExp(generatorModel.getExp()).createDropModel().drop(location);
+                        new DropBuilder(generatorModel.tier()).setWorth(generatorModel.worth()).setExp(generatorModel.exp()).createDropModel().drop(location);
                     });
                 }
             }
