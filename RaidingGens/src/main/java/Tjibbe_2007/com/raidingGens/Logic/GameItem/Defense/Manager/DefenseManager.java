@@ -81,7 +81,7 @@ public class DefenseManager implements GameItemManagerInterface {
         event.setDropItems(false);
 
         // Gets de defense model and removes it
-        customPlayer.removePlacedGenerators(location);
+        customPlayer.removePlacedDefense(location);
         GameItemBuilderInterface generator = defense.get(block.getLocation());
         defense.remove(block.getLocation());
 
