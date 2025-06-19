@@ -10,7 +10,7 @@ import org.bukkit.inventory.meta.ItemMeta;
 import java.util.List;
 import java.util.UUID;
 
-public record GeneratorModel(Integer tier, Material material, String name, List<String> lore, Float cost, Integer exp, Float worth, Integer requirement, UUID owner, Location location) implements GameItemBuilderInterface {
+public record GeneratorModel(int tier, Material material, String name, List<String> lore, Float cost, Integer exp, Float worth, Integer requirement, UUID owner, Location location) implements GameItemBuilderInterface {
     public ItemStack create() {
         ItemStack item = new ItemStack(material);
         ItemMeta itemMeta = item.getItemMeta();
