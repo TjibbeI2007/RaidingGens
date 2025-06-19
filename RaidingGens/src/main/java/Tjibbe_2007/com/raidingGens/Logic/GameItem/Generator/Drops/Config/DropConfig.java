@@ -26,7 +26,14 @@ public class DropConfig {
         ))
         .toList();
 
-    public static DropConfig getInstance() { return new DropConfig(); }
+    private DropConfig() {} // Private constructor to prevent external instantiation
+
+    public static DropConfig getInstance() {
+        if (instance == null) {
+            instance = new DropConfig();
+        }
+        return instance;
+    }
     public int getExp(String name) { return generatorConfig.getExp(materials.get(names.indexOf(name))); }
     public float getWorth(String name) { return generatorConfig.getWorth(materials.get(names.indexOf(name))); }
     public int getTier(String name) { return generatorConfig.getTier((materials.get(names.indexOf(name)))); }
