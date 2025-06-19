@@ -44,6 +44,6 @@ public class GameItemBuilder {
     public GameItemBuilderInterface build() {
         if (gameItemConfig instanceof GeneratorConfig) return new GeneratorModel(tier, material, name, lore, cost, exp, worth, requirement, owner, location);
         else if (gameItemConfig instanceof DefenseConfig) return new DefenseModel(tier, material, name, lore, cost, requirement, owner, location);
-        return null;
+        throw new IllegalStateException("Unsupported GameItemConfig type: " + gameItemConfig.getClass().getName());
     }
 }
