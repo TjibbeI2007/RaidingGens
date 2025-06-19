@@ -1,6 +1,5 @@
 package Tjibbe_2007.com.raidingGens.Logic.GameItem.Generator.Drops.Config;
 
-import Tjibbe_2007.com.raidingGens.Logic.GameItem.GameItem.Config.GameItemConfig;
 import Tjibbe_2007.com.raidingGens.Logic.GameItem.Generator.Config.GeneratorConfig;
 import org.bukkit.Material;
 

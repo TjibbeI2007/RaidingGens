@@ -1,6 +1,7 @@
 package Tjibbe_2007.com.raidingGens.Logic.GameItem.Generator.Repository;
 
 import Tjibbe_2007.com.raidingGens.Logic.GameItem.GameItem.Model.GameItemBuilder;
+import Tjibbe_2007.com.raidingGens.Logic.GameItem.GameItem.Model.GameItemBuilderInterface;
 import Tjibbe_2007.com.raidingGens.Logic.GameItem.Generator.Config.GeneratorConfig;
 import Tjibbe_2007.com.raidingGens.Logic.GameItem.Generator.Manager.GeneratorManager;
 import Tjibbe_2007.com.raidingGens.Logic.GameItem.Generator.Model.GeneratorModel;
@@ -33,13 +34,13 @@ public class GeneratorRepository implements RepositoryInterface {
     public boolean save() {
         create();
 
-        HashMap<Location, GeneratorModel> generators = GeneratorManager.getGenerators();
+        HashMap<Location, GameItemBuilderInterface> generators = GeneratorManager.getGenerators();
         HashMap<Integer, HashMap<String, Object>> generatorData = new HashMap<>();
 
-        generators.forEach(((location, generatorModel) -> {
+        generators.forEach(((location, gameItemModel) -> {
             HashMap<String, Object> generatorInfo = new HashMap<>();
 
-            generatorInfo.put("owner", generatorModel.owner().toString());
+            generatorInfo.put("owner", ((GeneratorModel) gameItemModel).owner().toString());
             generatorInfo.put("location", location.serialize());
 
             generatorData.put(generatorData.size(), generatorInfo);
@@ -59,7 +60,7 @@ public class GeneratorRepository implements RepositoryInterface {
 
         ConfigurationSection playersSection = dataConfig.getConfigurationSection("generators");
         if (playersSection == null) return false;
-        HashMap<Location, GeneratorModel> generators = new HashMap<>();
+        HashMap<Location, GameItemBuilderInterface> generators = new HashMap<>();
 
         for (String key : playersSection.getKeys(false)) {
             ConfigurationSection generatorInfo = playersSection.getConfigurationSection(key);
@@ -76,7 +77,7 @@ public class GeneratorRepository implements RepositoryInterface {
             Material material = location.getBlock().getType();
             if (!GeneratorConfig.getInstance().isValidMaterial(material)) continue;
 
-            generators.put(location, (GeneratorModel) new GameItemBuilder(material)
+            generators.put(location, new GameItemBuilder(material)
                             .setOwner(owner)
                             .build());
         }

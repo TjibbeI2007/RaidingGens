@@ -4,7 +4,7 @@ import org.bukkit.Material;
 
 import java.util.List;
 
-public interface GameItemConfig {
+public interface GameItemConfigInterface {
     boolean isValidMaterial(Material material);
     int getTier(Material material);
     String getName(Material material);

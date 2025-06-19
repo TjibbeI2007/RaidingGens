@@ -1,6 +1,6 @@
 package Tjibbe_2007.com.raidingGens.Logic.GameItem.Generator.Config;
 
-import Tjibbe_2007.com.raidingGens.Logic.GameItem.GameItem.Config.GameItemConfig;
+import Tjibbe_2007.com.raidingGens.Logic.GameItem.GameItem.Config.GameItemConfigInterface;
 import lombok.Getter;
 import org.bukkit.Material;
 
@@ -10,7 +10,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
-public class GeneratorConfig implements GameItemConfig {
+public class GeneratorConfig implements GameItemConfigInterface {
     @Getter
     private final List<Material> materials = List.of(
                 Material.WHITE_STAINED_GLASS, Material.ORANGE_STAINED_GLASS, Material.MAGENTA_STAINED_GLASS,
@@ -107,9 +107,7 @@ public class GeneratorConfig implements GameItemConfig {
     public int getRequirement(Material material) { return requirementsMap.getOrDefault(material, 1); }
     public List<String> getLore(Material material) { return loreMap.getOrDefault(material, new ArrayList<>()); }
     public Material getMaterial(Integer tier) {
-        if (tier < 1 || tier > materials.size()) {
-            throw new IllegalArgumentException("Tier must be between 1 and " + materials.size() + ". Provided: " + tier);
-        }
+        if (tier < 1 || tier > materials.size()) { throw new IllegalArgumentException("Tier must be between 1 and " + materials.size() + ". Provided: " + tier); }
         return materials.get(tier - 1);
     }
 }

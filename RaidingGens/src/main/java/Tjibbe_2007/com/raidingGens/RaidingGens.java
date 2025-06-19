@@ -5,6 +5,7 @@ import Tjibbe_2007.com.raidingGens.Commands.Map.MapCreateCommand;
 import Tjibbe_2007.com.raidingGens.Listeners.BlockHandler;
 import Tjibbe_2007.com.raidingGens.Listeners.ConnectionHandler;
 import Tjibbe_2007.com.raidingGens.Listeners.InteractionHandler;
+import Tjibbe_2007.com.raidingGens.Logic.GameItem.Defense.Repository.DefenseRepository;
 import Tjibbe_2007.com.raidingGens.Logic.GameItem.Generator.Drops.Logic.GeneratorDrop;
 import Tjibbe_2007.com.raidingGens.Logic.GameItem.Generator.Repository.GeneratorRepository;
 import Tjibbe_2007.com.raidingGens.Logic.Player.Repository.CustomPlayerRepository;
@@ -17,6 +18,7 @@ import java.util.List;
 public final class RaidingGens extends JavaPlugin {
     private final List<RepositoryInterface> repositories = List.of(
         new CustomPlayerRepository(),
+        new DefenseRepository(),
         new GeneratorRepository()
     );
 

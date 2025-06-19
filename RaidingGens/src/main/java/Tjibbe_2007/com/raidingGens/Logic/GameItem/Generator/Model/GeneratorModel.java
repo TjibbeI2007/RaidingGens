@@ -1,6 +1,7 @@
 package Tjibbe_2007.com.raidingGens.Logic.GameItem.Generator.Model;
 
 import Tjibbe_2007.com.raidingGens.Logic.GameItem.GameItem.Model.GameItemBuilderInterface;
+import lombok.Getter;
 import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.inventory.ItemStack;

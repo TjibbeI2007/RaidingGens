@@ -1,5 +1,6 @@
 package Tjibbe_2007.com.raidingGens.Logic.Player.Model;
 
+import Tjibbe_2007.com.raidingGens.Logic.GameItem.GameItem.Model.GameItemBuilderInterface;
 import Tjibbe_2007.com.raidingGens.Logic.GameItem.Generator.Manager.GeneratorManager;
 import Tjibbe_2007.com.raidingGens.Logic.GameItem.Generator.Model.GeneratorModel;
 import Tjibbe_2007.com.raidingGens.Logic.Player.Scoreboard.Manager.ScoreboardManager;
@@ -15,7 +16,7 @@ public class PlayerGenerator {
 
     @Getter
     @Setter
-    private HashMap<Location, GeneratorModel> placedGenerators = new HashMap<>();
+    private HashMap<Location, GameItemBuilderInterface> placedGenerators = new HashMap<>();
     @Getter
     private int maxGenerators = 10;
 
@@ -23,8 +24,8 @@ public class PlayerGenerator {
         this.customPlayer = customPlayer;
     }
 
-    public void addPlacedGenerators(Location location, GeneratorModel generatorModel) {
-        placedGenerators.put(location, generatorModel);
+    public void addPlacedGenerators(Location location, GameItemBuilderInterface model) {
+        placedGenerators.put(location, model);
         ScoreboardManager.updateScoreboard(customPlayer);
     }
     public void removePlacedGenerators(Location location) {

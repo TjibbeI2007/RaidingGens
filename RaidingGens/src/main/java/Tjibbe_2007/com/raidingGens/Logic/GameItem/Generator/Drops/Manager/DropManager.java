@@ -38,8 +38,8 @@ public class DropManager {
 
             GeneratorConfig instance = GeneratorConfig.getInstance();
             Material material = instance.getMaterial(tier);
-            balance += instance.getWorth(material);
-            exp += instance.getExp(material);
+            balance += instance.getWorth(material)*itemStack.getAmount();
+            exp += instance.getExp(material)*itemStack.getAmount();
 
             inventory.removeItem(itemStack);
         }

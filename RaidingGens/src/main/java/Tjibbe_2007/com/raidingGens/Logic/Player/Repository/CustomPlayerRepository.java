@@ -3,7 +3,6 @@ package Tjibbe_2007.com.raidingGens.Logic.Player.Repository;
 import Tjibbe_2007.com.raidingGens.Logic.GameItem.GameItem.Model.GameItemBuilderInterface;
 import Tjibbe_2007.com.raidingGens.Logic.GameItem.GameItem.Model.GameItemBuilder;
 import Tjibbe_2007.com.raidingGens.Logic.GameItem.Generator.Config.GeneratorConfig;
-import Tjibbe_2007.com.raidingGens.Logic.GameItem.Generator.Model.GeneratorModel;
 import Tjibbe_2007.com.raidingGens.Logic.Player.Manager.CustomPlayerManager;
 import Tjibbe_2007.com.raidingGens.Logic.Player.Model.CustomPlayer;
 import Tjibbe_2007.com.raidingGens.Logic.Utils.Repository.RepositoryInterface;
@@ -56,6 +55,14 @@ public class CustomPlayerRepository implements RepositoryInterface {
             );
             playerData.put("placedGenerators", generatorData);
 
+            HashMap<Integer, HashMap<String, Object>> defenseData = new HashMap<>();
+            customPlayer.getPlacedDefense().forEach((location, generatorModel) ->
+                defenseData.put(defenseData.size(), new HashMap<>() {{
+                    put("location", location.serialize());
+                }})
+            );
+            playerData.put("placedDefense", defenseData);
+
             dataConfig.set("customPlayers."+uuid, playerData);
         });
 
@@ -84,7 +91,7 @@ public class CustomPlayerRepository implements RepositoryInterface {
             float tokens = (float) playerData.getDouble("tokens");
             int maxGenerators = playerData.getInt("maxGenerators");
 
-            HashMap<Location, GeneratorModel> placedGenerators = new HashMap<>();
+            HashMap<Location, GameItemBuilderInterface> placedGenerators = new HashMap<>();
             ConfigurationSection placedGeneratorsSection = playerData.getConfigurationSection("placedGenerators");
             if (placedGeneratorsSection != null) {
                 for (String generatorKey : placedGeneratorsSection.getKeys(false)) {
@@ -103,7 +110,30 @@ public class CustomPlayerRepository implements RepositoryInterface {
                             .setLocation(location)
                             .build();
 
-                    placedGenerators.put(location, (GeneratorModel) generatorModel);
+                    placedGenerators.put(location, generatorModel);
+                }
+            }
+
+            HashMap<Location, GameItemBuilderInterface> placedDefense = new HashMap<>();
+            ConfigurationSection placedDefenseSection = playerData.getConfigurationSection("placedGenerators");
+            if (placedDefenseSection != null) {
+                for (String generatorKey : placedDefenseSection.getKeys(false)) {
+                    ConfigurationSection generatorInfo = placedDefenseSection.getConfigurationSection(generatorKey);
+                    if (generatorInfo == null) continue;
+
+                    ConfigurationSection locationSection = generatorInfo.getConfigurationSection("location");
+                    if (locationSection == null) continue;
+
+                    Location location = Location.deserialize(locationSection.getValues(false));
+                    Material material = location.getBlock().getType();
+                    if (!GeneratorConfig.getInstance().isValidMaterial(material)) continue;
+
+                    GameItemBuilderInterface generatorModel = new GameItemBuilder(material)
+                            .setOwner(uuid)
+                            .setLocation(location)
+                            .build();
+
+                    placedDefense.put(location, generatorModel);
                 }
             }
 
@@ -114,6 +144,7 @@ public class CustomPlayerRepository implements RepositoryInterface {
             customPlayer.setTokens(tokens);
             customPlayer.setMaxGenerators(maxGenerators);
             customPlayer.setPlacedGenerators(placedGenerators);
+            customPlayer.setPlacedDefense(placedDefense);
 
             new CustomPlayerManager().add(uuid, customPlayer);
         }
