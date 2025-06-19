@@ -23,12 +23,15 @@ public class CustomPlayer {
     private final PlayerGenerator playerGenerator;
     @Delegate
     private final PlayerCurrency playerCurrency;
+    @Delegate
+    private final PlayerDefense playerDefense;
 
     public CustomPlayer(UUID uuid) {
         this.uuid = uuid;
         this.classPlayerLevel = new PlayerLevel(this);
         this.playerGenerator = new PlayerGenerator(this);
         this.playerCurrency = new PlayerCurrency(this);
+        this.playerDefense = new PlayerDefense(this);
     }
 
     public void reloadPlayer() {

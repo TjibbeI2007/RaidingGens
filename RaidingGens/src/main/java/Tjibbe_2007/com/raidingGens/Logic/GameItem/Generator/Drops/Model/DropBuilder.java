@@ -13,10 +13,11 @@ public class DropBuilder {
 
     public DropBuilder (Integer tier) {
         this.tier = tier;
-        this.name = DropConfig.getName(tier);
-        this.lore = DropConfig.getLore(tier);
-        this.exp = DropConfig.getExp(name);
-        this.worth = DropConfig.getWorth(name);
+        DropConfig dropConfig = DropConfig.getInstance();
+        this.name = dropConfig.getName(tier);
+        this.lore = dropConfig.getLore(tier);
+        this.exp = dropConfig.getExp(name);
+        this.worth = dropConfig.getWorth(name);
     }
 
     public DropBuilder setName(String name) {

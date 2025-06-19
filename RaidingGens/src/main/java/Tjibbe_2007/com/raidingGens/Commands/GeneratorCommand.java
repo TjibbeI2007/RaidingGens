@@ -1,7 +1,8 @@
 package Tjibbe_2007.com.raidingGens.Commands;
 
+import Tjibbe_2007.com.raidingGens.Logic.GameItem.GameItem.Model.GameItemBuilder;
 import Tjibbe_2007.com.raidingGens.Logic.GameItem.Generator.Config.GeneratorConfig;
-import Tjibbe_2007.com.raidingGens.Logic.GameItem.Generator.Model.GeneratorBuilder;
+
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
@@ -12,7 +13,7 @@ public class GeneratorCommand implements CommandExecutor {
     @Override
     public boolean onCommand(@NotNull CommandSender commandSender, @NotNull Command command, @NotNull String s, @NotNull String[] strings) {
         if (commandSender instanceof Player player) {
-            GeneratorConfig.getMaterials().forEach(material -> player.getInventory().addItem(new GeneratorBuilder(material).build().create()));
+            GeneratorConfig.getInstance().getMaterials().forEach(material -> player.getInventory().addItem(new GameItemBuilder(material).build().create()));
 
             player.sendMessage("§8[§a?§8] §aYou received a generator");
             return true;

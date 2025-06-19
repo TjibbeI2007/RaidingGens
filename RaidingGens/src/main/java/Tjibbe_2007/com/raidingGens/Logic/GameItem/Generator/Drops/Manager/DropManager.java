@@ -34,11 +34,12 @@ public class DropManager {
         Map<Integer, ? extends ItemStack> notes = inventory.all(Material.PAPER);
 
         for (ItemStack itemStack : notes.values()) {
-            int tier = DropConfig.getTier(itemStack.getItemMeta().getDisplayName());
+            int tier = DropConfig.getInstance().getTier(itemStack.getItemMeta().getDisplayName());
 
-            Material material = GeneratorConfig.getMaterial(tier);
-            balance += GeneratorConfig.getWorth(material);
-            exp += GeneratorConfig.getExp(material);
+            GeneratorConfig instance = GeneratorConfig.getInstance();
+            Material material = instance.getMaterial(tier);
+            balance += instance.getWorth(material)*itemStack.getAmount();
+            exp += instance.getExp(material)*itemStack.getAmount();
 
             inventory.removeItem(itemStack);
         }
