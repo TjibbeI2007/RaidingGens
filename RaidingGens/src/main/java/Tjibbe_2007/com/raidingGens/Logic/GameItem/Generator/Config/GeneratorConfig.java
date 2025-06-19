@@ -97,7 +97,8 @@ public class GeneratorConfig implements GameItemConfigInterface {
                 (a, b) -> b, HashMap::new
             ));
 
-    public static GeneratorConfig getInstance() { return new GeneratorConfig(); }
+    @Getter
+    private static GeneratorConfig instance = new GeneratorConfig();
     public boolean isValidMaterial(Material material) { return materials.contains(material); }
     public int getTier(Material material) { return tiersMap.getOrDefault(material, 1); }
     public String getName(Material material) { return namesMap.getOrDefault(material, "§8[§fTier I§8] §fGenerator"); }

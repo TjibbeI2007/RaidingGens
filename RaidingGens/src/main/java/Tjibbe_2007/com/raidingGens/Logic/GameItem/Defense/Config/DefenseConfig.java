@@ -57,7 +57,8 @@ public class DefenseConfig implements GameItemConfigInterface {
                 (a, b) -> b, HashMap::new
             ));
 
-    public static DefenseConfig getInstance() { return new DefenseConfig(); }
+    @Getter
+    private final static DefenseConfig instance = new DefenseConfig();
     public float getSilkTouchChance() { return 0.1f; }
     public int getExp(Material material) { return 0; }
     public float getWorth(Material material) { return 0; }

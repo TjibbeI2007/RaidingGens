@@ -1,5 +1,6 @@
 package Tjibbe_2007.com.raidingGens.Logic.GameItem.Generator.Drops.Logic;
 
+import Tjibbe_2007.com.raidingGens.Logic.GameItem.Generator.Drops.Config.DropConfig;
 import Tjibbe_2007.com.raidingGens.Logic.GameItem.Generator.Drops.Model.DropBuilder;
 import Tjibbe_2007.com.raidingGens.Logic.GameItem.Generator.Model.GeneratorModel;
 import Tjibbe_2007.com.raidingGens.Logic.Player.Manager.CustomPlayerManager;
@@ -26,6 +27,6 @@ public class GeneratorDrop {
                     });
                 }
             }
-        }.runTaskTimer(plugin, 0, 20L);
+        }.runTaskTimer(plugin, 0, DropConfig.getDelay());
     }
 }

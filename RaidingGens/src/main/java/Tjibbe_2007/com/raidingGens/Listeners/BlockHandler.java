@@ -22,24 +22,11 @@ public class BlockHandler implements Listener {
 
     @EventHandler
     public void onBlockPlace(BlockPlaceEvent event) {
-        Player player = event.getPlayer();
-        Block block = event.getBlockPlaced();
-        Location location = block.getLocation();
-
         new GameItemManager().place(event);
     }
     
     @EventHandler
     public void onBlockBreak(BlockBreakEvent event) {
-        Player player = event.getPlayer();
-        Block block = event.getBlock();
-        Location location = block.getLocation();
-
-        if (GeneratorConfig.getInstance().isValidMaterial(block.getType())) {
-            player.stopSound(SoundCategory.BLOCKS);
-            player.playSound(location, Sound.BLOCK_VAULT_BREAK,1.0f,0.1f);
-        }
-
         new GameItemManager().remove(event);
     }
 }

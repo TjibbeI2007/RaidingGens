@@ -27,6 +27,7 @@ public class DropConfig {
         .toList();
 
     public static DropConfig getInstance() { return new DropConfig(); }
+    public static long getDelay() { return 60L; }
     public int getExp(String name) { return generatorConfig.getExp(materials.get(names.indexOf(name))); }
     public float getWorth(String name) { return generatorConfig.getWorth(materials.get(names.indexOf(name))); }
     public int getTier(String name) { return generatorConfig.getTier((materials.get(names.indexOf(name)))); }
