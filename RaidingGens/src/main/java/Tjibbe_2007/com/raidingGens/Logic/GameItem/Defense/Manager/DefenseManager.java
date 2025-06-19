@@ -5,6 +5,7 @@ import Tjibbe_2007.com.raidingGens.Logic.GameItem.Defense.Model.DefenseModel;
 import Tjibbe_2007.com.raidingGens.Logic.GameItem.GameItem.Manager.GameItemManagerInterface;
 import Tjibbe_2007.com.raidingGens.Logic.GameItem.GameItem.Model.GameItemBuilder;
 import Tjibbe_2007.com.raidingGens.Logic.GameItem.GameItem.Model.GameItemBuilderInterface;
+import Tjibbe_2007.com.raidingGens.Logic.GameItem.Generator.Config.GeneratorConfig;
 import Tjibbe_2007.com.raidingGens.Logic.Player.Manager.CustomPlayerManager;
 import Tjibbe_2007.com.raidingGens.Logic.Player.Model.CustomPlayer;
 import lombok.Getter;
@@ -12,6 +13,7 @@ import lombok.Setter;
 import org.bukkit.*;
 import org.bukkit.block.Block;
 import org.bukkit.enchantments.Enchantment;
+import org.bukkit.entity.Item;
 import org.bukkit.entity.Player;
 import org.bukkit.event.block.BlockBreakEvent;
 import org.bukkit.event.block.BlockPlaceEvent;
@@ -60,7 +62,7 @@ public class DefenseManager implements GameItemManagerInterface {
         Location location = block.getLocation();
 
         // Check if the player is the owner
-        if (!((DefenseModel) DefenseManager.defense.get(location)).owner().equals(customPlayer.getUuid())) {
+        if (!((DefenseModel) defense.get(location)).owner().equals(customPlayer.getUuid())) {
             // Play a sound
             player.stopSound(SoundCategory.BLOCKS);
             player.playSound(location, Sound.BLOCK_VAULT_BREAK,1.0f,0.1f);
@@ -80,8 +82,8 @@ public class DefenseManager implements GameItemManagerInterface {
 
         // Gets de defense model and removes it
         customPlayer.removePlacedDefense(location);
-        GameItemBuilderInterface defense = DefenseManager.defense.get(block.getLocation());
-        DefenseManager.defense.remove(block.getLocation());
+        GameItemBuilderInterface generator = defense.get(block.getLocation());
+        defense.remove(block.getLocation());
 
         // Get the tool and the silk touch level
         ItemStack tool = event.getPlayer().getInventory().getItemInMainHand();
@@ -94,7 +96,7 @@ public class DefenseManager implements GameItemManagerInterface {
         player.playSound(location, Sound.BLOCK_ENCHANTMENT_TABLE_USE, 1.0f, 1f);
 
         // Creates the item and adds it to the player's inventory
-        ItemStack itemStack = defense.create();
+        ItemStack itemStack = generator.create();
         customPlayer.getPlayer().getInventory().addItem(itemStack);
     }
 
