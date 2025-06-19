@@ -1,6 +1,7 @@
 package Tjibbe_2007.com.raidingGens.Logic.GameItem.Generator.Drops.Config;
 
 import Tjibbe_2007.com.raidingGens.Logic.GameItem.Generator.Config.GeneratorConfig;
+import lombok.Getter;
 import org.bukkit.Material;
 
 import java.util.List;
@@ -26,7 +27,8 @@ public class DropConfig {
         ))
         .toList();
 
-    public static DropConfig getInstance() { return new DropConfig(); }
+    @Getter
+    private static final DropConfig instance = new DropConfig();
     public static long getDelay() { return 60L; }
     public int getExp(String name) { return generatorConfig.getExp(materials.get(names.indexOf(name))); }
     public float getWorth(String name) { return generatorConfig.getWorth(materials.get(names.indexOf(name))); }
