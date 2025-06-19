@@ -23,12 +23,13 @@ public class GameItemBuilder {
     private final Integer requirement;
     private UUID owner;
     private Location location;
-    private GameItemConfigInterface gameItemConfig;
+    private final GameItemConfigInterface gameItemConfig;
 
     public GameItemBuilder(Material material) {
         this.material = material;
         if (GeneratorConfig.getInstance().isValidMaterial(material)) this.gameItemConfig = GeneratorConfig.getInstance();
         else if (DefenseConfig.getInstance().isValidMaterial(material)) this.gameItemConfig = DefenseConfig.getInstance();
+        else throw new IllegalArgumentException("Invalid material for GameItem: " + material.name());
         this.tier = gameItemConfig.getTier(material);
         this.name = gameItemConfig.getName(material);
         this.lore = gameItemConfig.getLore(material);

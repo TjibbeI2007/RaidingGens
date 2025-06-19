@@ -40,7 +40,7 @@ public class GeneratorRepository implements RepositoryInterface {
         generators.forEach(((location, gameItemModel) -> {
             HashMap<String, Object> generatorInfo = new HashMap<>();
 
-            generatorInfo.put("owner", ((GeneratorModel) gameItemModel).owner().toString());
+            generatorInfo.put("owner", gameItemModel.owner().toString());
             generatorInfo.put("location", location.serialize());
 
             generatorData.put(generatorData.size(), generatorInfo);

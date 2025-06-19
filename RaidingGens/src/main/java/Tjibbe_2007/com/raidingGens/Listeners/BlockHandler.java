@@ -22,11 +22,11 @@ public class BlockHandler implements Listener {
 
     @EventHandler
     public void onBlockPlace(BlockPlaceEvent event) {
-        new GameItemManager().place(event);
+        GameItemManager.getInstance().place(event);
     }
     
     @EventHandler
     public void onBlockBreak(BlockBreakEvent event) {
-        new GameItemManager().remove(event);
+        GameItemManager.getInstance().remove(event);
     }
 }

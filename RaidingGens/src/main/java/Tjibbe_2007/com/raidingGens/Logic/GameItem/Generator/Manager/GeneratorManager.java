@@ -25,6 +25,8 @@ import java.util.HashMap;
 public class GeneratorManager implements GameItemManagerInterface {
     @Getter @Setter
     private static HashMap<Location, GameItemBuilderInterface> generators = new HashMap<>();
+    @Getter
+    private static final GeneratorManager instance = new GeneratorManager();
 
     public void place(BlockPlaceEvent event) {
         // Init variabels
@@ -86,6 +88,4 @@ public class GeneratorManager implements GameItemManagerInterface {
         ItemStack itemStack = generator.create();
         customPlayer.getPlayer().getInventory().addItem(itemStack);
     }
-
-    public static GeneratorManager getInstance() { return new GeneratorManager(); }
 }

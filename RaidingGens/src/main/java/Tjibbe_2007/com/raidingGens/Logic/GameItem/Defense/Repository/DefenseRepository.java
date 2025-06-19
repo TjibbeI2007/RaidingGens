@@ -40,7 +40,7 @@ public class DefenseRepository implements RepositoryInterface {
         defense.forEach(((location, gameItemModel) -> {
             HashMap<String, Object> defenseInfo = new HashMap<>();
 
-            defenseInfo.put("owner", ((DefenseModel) gameItemModel).owner().toString());
+            defenseInfo.put("owner", gameItemModel.owner().toString());
             defenseInfo.put("location", location.serialize());
 
             defenseData.put(defenseData.size(), defenseInfo);
